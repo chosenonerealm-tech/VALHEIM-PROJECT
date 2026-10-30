@@ -25,7 +25,7 @@ namespace Alfrik
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "local.alfrik";
-        public const string Version = "0.9.11";
+        public const string Version = "0.9.12";
 
         internal static ManualLogSource Log;
         internal static string Folder;
@@ -142,6 +142,7 @@ namespace Alfrik
             GroundWave.Register();
             ReturnedShot.Register();
             Strikes.Register();
+            Quake.Register();
             Brain.Register();
             Fx.Register();
         }

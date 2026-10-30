@@ -18,12 +18,20 @@ namespace Alfrik
     //  Reaping Sweep (Twin Harvest) - twists his body back, then the wide sweep and the reverse sweep straight after it
     //                     (the second x1.2). cd 14 s.
     //  Odin's Fall      - against a target 8-20 m off: a crouch, then he leaps in a high arc and comes down just short of
-    //                     it, a blast 5 m around that cannot be blocked. Only where there is open sky and ground to land on.
-    //                     cd 20 s.
+    //                     it, and the blast goes out from where he lands in rings, 1.5 m further each step out to 6 m
+    //                     (Quake). Only where there is open sky and ground to land on. cd 20 s.
     //  Earthsplitter    - against a target 7-25 m off: the axe raised, then driven into the ground, and a rupture races
     //                     26 m along the ground at the target (GroundWave). cd 16 s.
     //  War Stomp        - someone beside or behind him within 4 m (or two enemies that close) for a moment: the knee
-    //                     drawn up, then the foot comes down and the ground heaves 4 m around, throwing them back. cd 18 s.
+    //                     drawn up, then the foot comes down and the ground heaves outward in rings to 4.5 m. cd 18 s.
+    //  Grave Ring       - a slam, then rings burst outward from him, 2 m further each step out to 8 m (Quake). cd 22 s.
+    //  Every wave along the ground (the rings, the rupture) catches only those on the ground as it reaches them.
+    //  Odin's Wrath     - at range his main move: three lightning bolts, on the target, a second enemy, the target. cd 6 s.
+    //  Odin's Charge    - once the storm has worn the target down (stamina under 30% after a barrage, or three barrages):
+    //                     a burst run at it, then up to three slashes, each only with it in reach.
+    //  War Horn         - a roar that slows everyone around for 4 s and drives him on, faster for 6 s. cd 28 s.
+    //  He swings only at a target in reach: FURY and Reaping Sweep close in first, an Executioner or a bash out of
+    //  reach is not made.
     //  Executioner      - the axe raised high, a pause, a red flash, then an overhead chop that cannot be blocked. cd 18 s.
     //  Shoulder Breaker - phase 1's bash from a shorter step, against a raised guard. cd 14 s.
     //  FURY: Odin's Judgment - plants the axe, roars and his runes flare, then three chops, each heavier than the last
@@ -98,10 +106,13 @@ namespace Alfrik
         private static Vector3 _leapFrom, _leapTo;
         private static readonly AccessTools.FieldRef<Character, float> AirAltitude = AccessTools.FieldRefAccess<Character, float>("m_maxAirAltitude");
         private static int _leapMask, _arcMask;
-        private const float FallRadius = 5f, StompRadius = 4f, HornRadius = 15f;
+        private const float StompRadius = 4f, HornRadius = 15f;
         private static float _nextRetrib, _retribUntil, _nextRetaliate, _nextRing, _nextWrath, _nextHorn, _nextAdvance,
-            _nextExecStomp, _strikeAt;
+            _nextExecStomp, _strikeAt, _hornUntil;
         private static int _strikes, _retribHits, _retribAnswers;
+
+        // War Horn's push on him: quicker for a few seconds after it sounds (Speed).
+        private static bool HornDrive => Time.time < _hornUntil;
         private static bool _leapLetGo;
         private static Character _retaliate;
         private static readonly List<Act> _ready = new List<Act>();
@@ -134,6 +145,7 @@ namespace Alfrik
                 case Act.WrathTell: return Poses.Raise;
                 case Act.Wrath: return Poses.Raise;
                 case Act.HornTell: return Poses.ArmsBack;
+                case Act.RushTell: return Poses.Crouch;
                 default: return Poses.None;
             }
         }
@@ -151,6 +163,8 @@ namespace Alfrik
             _nextHorn = Time.time + 20f;
             _nextAdvance = Time.time + 12f;
             _nextExecStomp = 0f;
+            _barrages = 0;
+            _hornUntil = 0f;
             _retribUntil = 0f;
             _retaliate = null;
             _waveAt = _splitAt = 0f;
@@ -226,6 +240,12 @@ namespace Alfrik
             Vector3 spot = Vector3.zero;
             if (now >= _nextFury && dist <= 6f)
                 pick = Act.FuryTell;
+            // At range the storm is his main play: Odin's Wrath again and again until the target is worn down, then Odin's
+            // Charge; his other moves still come now and then.
+            else if (dist >= 5f && dist <= 30f && Drained(out _drainedWhy))
+                pick = Act.RushTell;
+            else if (dist >= 8f && dist <= 30f && now >= _nextWrath && UnityEngine.Random.value < 0.7f)
+                pick = Act.WrathTell;
             else
             {
                 _ready.Clear();
@@ -294,8 +314,15 @@ namespace Alfrik
                     Start(Act.RingTell, Tell(0.7f));
                     Plugin.Log.LogInfo("Alfrik: Grave Ring");
                     break;
+                case Act.RushTell:
+                    _barrages = 0;
+                    Start(Act.RushTell, Tell(0.4f));
+                    Face(c, _target);
+                    Fx.Send(Fx.Charge);
+                    Plugin.Log.LogInfo("Alfrik: Odin's Charge at " + dist.ToString("0.0") + " m (" + _drainedWhy + ")");
+                    break;
                 case Act.WrathTell:
-                    _nextWrath = now + 25f;
+                    _nextWrath = now + 6f;
                     Start(Act.WrathTell, Tell(1f));
                     Sounds.PlayAt("thunder", c.GetCenterPoint(), 0.5f, 80f);
                     Plugin.Log.LogInfo("Alfrik: Odin's Wrath at " + dist.ToString("0.0") + " m");
@@ -319,6 +346,22 @@ namespace Alfrik
             _nextAbility = now + UnityEngine.Random.Range(1.5f, 2.5f);
             _moves++;
             return true;
+        }
+
+        // Odin's Charge comes once the storm has worn the target down: its stamina under 30% after at least one barrage
+        // (readable only for the player whose game runs him), or three barrages of Odin's Wrath since his last charge.
+        private static int _barrages;
+        private static string _drainedWhy;
+
+        private static bool Drained(out string why)
+        {
+            why = null;
+            if (_barrages >= 1 && _target is Player player && player == Player.m_localPlayer && player.GetMaxStamina() > 0f &&
+                player.GetStamina() < player.GetMaxStamina() * 0.3f)
+                why = "stamina " + (player.GetStamina() / player.GetMaxStamina() * 100f).ToString("0") + "%";
+            else if (_barrages >= 3)
+                why = _barrages + " barrages";
+            return why != null;
         }
 
         // Retribution, when he is free: the last one who struck him close by takes a sweep straight back (once every
@@ -394,21 +437,13 @@ namespace Alfrik
         private static void StompHit(Humanoid c)
         {
             Fx.Send(Fx.StompHit);
-            int thrown = 0;
-            foreach (Character enemy in Enemies(c, StompRadius + 0.5f))
-            {
-                if (Mathf.Abs(enemy.transform.position.y - c.transform.position.y) > 2f)
-                    continue;
-                Vector3 away = Flat(enemy.transform.position - c.transform.position);
-                Blast(c, enemy, away, 0.6f, 110f, 2.5f);
-                thrown++;
-            }
-            Plugin.Log.LogInfo("Alfrik's War Stomp throws back " + thrown);
+            // The ground heaves outward from his foot in rings (Quake), which log whom they caught.
+            Quake.Send(c, c.transform.position, Quake.Stomp);
         }
 
         // A blow from the ground under them (Odin's Fall, War Stomp): Skeggöld's own damage scaled, thrown away from him,
         // never blocked.
-        private static void Blast(Humanoid c, Character enemy, Vector3 away, float share, float push, float stagger)
+        internal static void Blast(Humanoid c, Character enemy, Vector3 away, float share, float push, float stagger)
         {
             ItemDrop.ItemData weapon = c.GetCurrentWeapon();
             var hit = new HitData();
@@ -508,16 +543,9 @@ namespace Alfrik
                 return;
             EndLeap(c);
             Fx.SendAt(Fx.FallLand, c.transform.position + Vector3.up * 0.01f);
-            int hit = 0;
-            foreach (Character enemy in Enemies(c, FallRadius + 0.5f))
-            {
-                if (Mathf.Abs(enemy.transform.position.y - c.transform.position.y) > 2.5f)
-                    continue;
-                Blast(c, enemy, Flat(enemy.transform.position - c.transform.position), 1.1f, 90f, 2f);
-                hit++;
-            }
-            Plugin.Log.LogInfo("Alfrik lands Odin's Fall " + Flat(c.transform.position - _leapFrom).magnitude.ToString("0.0") +
-                " m on, " + hit + " caught");
+            // The blast goes out from where he lands in rings (Quake), which log whom they caught.
+            Quake.Send(c, c.transform.position, Quake.FallLanding);
+            Plugin.Log.LogInfo("Alfrik lands Odin's Fall " + Flat(c.transform.position - _leapFrom).magnitude.ToString("0.0") + " m on");
             Start(Act.FallLand, 0.7f);
         }
 
@@ -565,9 +593,10 @@ namespace Alfrik
                         Start(Act.SweepChain, 4f);
                     break;
                 case Act.SweepChain:
-                    // Twin Harvest: the sweep, then the reverse sweep at once (the game carries the combo on).
-                    Drive(c, Vector3.zero, toTarget, false);
-                    if (!c.InAttack() && Time.time >= _recoverUntil && _swings < 2 && _target != null)
+                    // Twin Harvest: the sweep, then the reverse sweep at once (the game carries the combo on). Each only
+                    // with the target in reach; out of it he closes in first, never swinging at the air.
+                    Drive(c, dist > Reach && !c.InAttack() ? toTarget : Vector3.zero, toTarget, dist > 5f);
+                    if (InReach(dist) && !c.InAttack() && Time.time >= _recoverUntil && _swings < 2 && _target != null)
                     {
                         SwingBoost = _swings == 0 ? 1f : 1.2f;
                         if (Swing(c, false, "Reaping Sweep " + (_swings + 1)))
@@ -577,7 +606,11 @@ namespace Alfrik
                         }
                     }
                     if ((_swings >= 2 && !c.InAttack()) || now >= _actEnd)
+                    {
+                        if (_swings < 2)
+                            Plugin.Log.LogInfo("Alfrik's Reaping Sweep ends after " + _swings + " of 2: target out of reach (" + dist.ToString("0.0") + " m)");
                         EndAct(c);
+                    }
                     break;
                 case Act.FallTell:
                     Drive(c, Vector3.zero, toTarget, false);
@@ -645,6 +678,13 @@ namespace Alfrik
                     }
                     if (now >= _actEnd)
                     {
+                        // No chop at the air: out of reach when the warning ends, there is none.
+                        if (!InReach(dist))
+                        {
+                            Plugin.Log.LogInfo("Alfrik's Executioner: target out of reach (" + dist.ToString("0.0") + " m), no chop");
+                            EndAct(c);
+                            break;
+                        }
                         Unblockable(1.3f);
                         _heavyUntil = now + 0.3f;
                         Swing(c, true, "Executioner");
@@ -694,9 +734,10 @@ namespace Alfrik
                     Drive(c, Vector3.zero, toTarget, false);
                     if (_strikeAt > 0f && (now >= _strikeAt || Struck(_actStart)))
                     {
-                        Plugin.Log.LogInfo("Alfrik's Grave Ring is marked " + (Struck(_actStart) ? "with the blow" : "by time"));
+                        Plugin.Log.LogInfo("Alfrik's Grave Ring goes out " + (Struck(_actStart) ? "with the blow" : "by time"));
                         _strikeAt = 0f;
-                        Strikes.Send(c, c.transform.position, Strikes.GraveRing);
+                        // Rings bursting outward from him, step by step (Quake).
+                        Quake.Send(c, c.transform.position, Quake.GraveRing);
                     }
                     if ((_strikeAt <= 0f && !c.InAttack()) || now >= _actEnd)
                         EndAct(c);
@@ -724,7 +765,10 @@ namespace Alfrik
                         _strikeAt = now + 0.6f;
                     }
                     if (_strikes >= 3 && now >= _strikeAt)
+                    {
+                        _barrages++;
                         EndAct(c);
+                    }
                     break;
                 case Act.HornTell:
                     Drive(c, Vector3.zero, toTarget, false);
@@ -738,8 +782,10 @@ namespace Alfrik
                             Slow.Apply(c, enemy);
                             slowed++;
                         }
-                        Plugin.Log.LogInfo("Alfrik's War Horn slows " + slowed);
-                        Start(Act.Horn, 1.8f);
+                        // The horn drives him on: faster for 6 s, and only a short hold of the roar.
+                        _hornUntil = now + 6f;
+                        Plugin.Log.LogInfo("Alfrik's War Horn slows " + slowed + "; he is quickened for 6 s");
+                        Start(Act.Horn, 0.8f);
                     }
                     break;
                 case Act.Horn:
@@ -770,8 +816,9 @@ namespace Alfrik
                         Start(Act.FuryChain, 7f);
                     break;
                 case Act.FuryChain:
-                    Drive(c, Vector3.zero, toTarget, false);
-                    if (!c.InAttack() && Time.time >= _recoverUntil && _swings < 3 && _target != null)
+                    // Each blow only with the target in reach; out of it he closes in first, never swinging at the air.
+                    Drive(c, dist > Reach && !c.InAttack() ? toTarget : Vector3.zero, toTarget, dist > 5f);
+                    if (InReach(dist) && !c.InAttack() && Time.time >= _recoverUntil && _swings < 3 && _target != null)
                     {
                         bool last = _swings == 2;
                         SwingBoost = 1f + 0.3f * _swings;
@@ -784,10 +831,52 @@ namespace Alfrik
                         }
                     }
                     if ((_swings >= 3 && !c.InAttack()) || now >= _actEnd)
+                    {
+                        if (_swings < 3)
+                            Plugin.Log.LogInfo("Alfrik's FURY ends after " + _swings + " of 3 blows: target out of reach (" + dist.ToString("0.0") + " m)");
                         EndAct(c);
+                    }
+                    break;
+                case Act.RushTell:
+                    Drive(c, Vector3.zero, toTarget, false);
+                    if (now >= _actEnd)
+                    {
+                        Start(Act.Rush, 4f);
+                        _chargeDir = toTarget;
+                    }
+                    break;
+                case Act.Rush:
+                    // Odin's Charge: a burst run at the target (turning at most 120 degrees a second, so it is a charge),
+                    // then up to three slashes, each only with the target in reach.
+                    if (_target == null)
+                    {
+                        EndAct(c);
+                        break;
+                    }
+                    if (dist > Reach && _swings == 0)
+                    {
+                        _chargeDir = Vector3.RotateTowards(_chargeDir, toTarget, 120f * Mathf.Deg2Rad * Time.deltaTime, 0f);
+                        Drive(c, _chargeDir, _chargeDir, true);
+                    }
+                    else
+                    {
+                        Drive(c, dist > Reach && !c.InAttack() ? toTarget : Vector3.zero, toTarget, false);
+                        if (InReach(dist) && !c.InAttack() && Time.time >= _recoverUntil && _swings < 3 &&
+                            Swing(c, false, "Odin's Charge slash " + (_swings + 1)))
+                            _swings++;
+                    }
+                    if ((_swings >= 3 && !c.InAttack()) || now >= _actEnd)
+                    {
+                        if (_swings == 0)
+                            Plugin.Log.LogInfo("Alfrik's Odin's Charge ends out of reach (" + dist.ToString("0.0") + " m)");
+                        EndAct(c);
+                    }
                     break;
             }
         }
+
+        // Close enough for a swing to reach (his ordinary reach and a little).
+        private static bool InReach(float dist) => dist <= Reach + 0.4f;
 
         // Character.RPC_Damage (through OnHit) while the Iron Wall is up.
         private static bool WallHit(HitData hit)
