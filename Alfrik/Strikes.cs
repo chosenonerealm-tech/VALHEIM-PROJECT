@@ -6,7 +6,8 @@ namespace Alfrik
 {
     // Blows that fall a moment after they are marked on the ground, seen by everyone from one routed call; only the game
     // that owns him deals the damage (never blocked).
-    //  Grave Ring  - red runes in a ring 3-7 m around where he struck, then the ground erupts along it (1.2 s).
+    //  Grave Ring  - (not sent any more: Grave Ring goes out as stepped rings, Quake) red runes in a ring 3-7 m around
+    //                where he struck, then the ground erupts along it (1.2 s).
     //  Lightning   - Odin's Wrath: pale runes where the bolt will fall, then lightning, 2.2 m around (0.9 s).
     internal static class Strikes
     {

@@ -44,7 +44,7 @@ namespace Alfrik
         private enum Act { None, Charge, TwinTell, TwinChain, Guard, Throw, Break, RavensTell, Fists, Shoulder,
             Wall, ParryStance, SweepTell, ExecTell, FuryTell, FuryChain,
             SweepChain, FallTell, Fall, FallLand, SplitTell, Split, StompTell,
-            ExecFollow, RetribTell, RingTell, Ring, WrathTell, Wrath, HornTell, Horn, Advance }
+            ExecFollow, RetribTell, RingTell, Ring, WrathTell, Wrath, HornTell, Horn, Advance, RushTell, Rush }
         private enum BreakMode { Hold, Circle, Back }
 
         private const float Reach = 2.6f, ParryStaminaBreak = 40f;
@@ -250,7 +250,7 @@ namespace Alfrik
             {
                 EndLabel();
                 _recoverUntil = Time.time + (_burstLeft > 0 || _act == Act.TwinChain || _act == Act.FuryChain || _act == Act.Charge ||
-                    _act == Act.SweepChain || _act == Act.ExecFollow ? 0.1f : Phase2 ? 0.5f : 0.35f);
+                    _act == Act.SweepChain || _act == Act.ExecFollow || _act == Act.Rush ? 0.1f : Phase2 ? 0.5f : 0.35f);
             }
             _wasAttacking = attacking;
             bool recovering = Time.time < _recoverUntil;
@@ -453,7 +453,7 @@ namespace Alfrik
             else if (dist > 10f)
                 _chasing = true;
             float speed = boss ? AlfrikBoss.CurrentPhase.Speed : 1f;
-            if (_act == Act.Charge)
+            if (_act == Act.Charge || _act == Act.Rush)
                 speed = 2.2f;
             else if (_act == Act.Shoulder)
                 speed = 2.6f;
@@ -461,6 +461,8 @@ namespace Alfrik
                 speed *= 1.6f;
             if (WarCry)
                 speed *= 1.25f;
+            if (HornDrive)
+                speed *= 1.3f;
             AlfrikBoss.SetSpeed(speed);
         }
 
@@ -836,6 +838,13 @@ namespace Alfrik
                         Drive(c, toTarget, toTarget, true);
                         if (dist <= 1.9f || now >= _actEnd)
                         {
+                            // Phase 2: the dash fell short - no bash at the air.
+                            if (Phase2 && dist > Reach)
+                            {
+                                Plugin.Log.LogInfo("Alfrik's Shoulder Breaker: out of reach (" + dist.ToString("0.0") + " m), no bash");
+                                EndAct(c);
+                                break;
+                            }
                             // A real swing, so the bash has an animation; the shove lands with it.
                             Drive(c, Vector3.zero, toTarget, false);
                             bool swung = Swing(c, false);
@@ -1177,7 +1186,8 @@ namespace Alfrik
         {
             _shoulderHit = true;
             Unblockable(0.4f);
-            List<Character> struck = InFront(c, 2.2f, 70f);
+            // Phase 2's shove lands with the battle axe swing, so it reaches as far as that swing does.
+            List<Character> struck = Phase2 ? InFront(c, Reach + 0.4f, 90f) : InFront(c, 2.2f, 70f);
             Plugin.Log.LogInfo((Phase2 ? "Alfrik's Shoulder Breaker hits " : "Alfrik's Shoulder Charge hits ") + struck.Count +
                 (Phase2 ? (Struck(_swingAt) ? " (with the blow)" : " (by time)") : ""));
             foreach (Character enemy in struck)

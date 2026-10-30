@@ -85,7 +85,23 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.11)
+## Current state (0.9.12)
+
+0.9.12 (cloud, not built here; branch `cloud/phase2-fixes`, on top of 0.9.11, which is not yet played either):
+- Jumpable ground waves: Grave Ring, War Stomp and Odin's Fall's landing burst outward in stepped rings (`Quake` in
+  `GroundWave.cs`, RPC `Alfrik_Quake`); Earthsplitter stays a line. A wave catches only those on the ground as it
+  reaches them (`GroundWave.Airborne`: own character `IsOnGround`, others by synced height).
+- Range loop: Odin's Wrath (cd 6 s) is his main move at range; once the target is worn down (local player's stamina
+  under 30% after a barrage, or 3 barrages) he does Odin's Charge (burst run, up to 3 slashes in reach).
+- He never swings at the air: FURY / Reaping Sweep close in first; Executioner and the phase-2 bash are skipped out of
+  reach.
+- War Horn: short hold (0.8 s) and +30% speed for him for 6 s.
+- Odin's Wrath's bolt and light fade out over 1.2 s instead of blinking.
+- Phase-2 Shoulder bash reaches as far as the battle axe swing (it hit 0 of 4 in the 0.9.11 log).
+- New log lines: "Alfrik's Grave Ring / War Stomp / Odin's Fall landing / Earthsplitter catches N (M jumped it)",
+  "Alfrik: Odin's Charge at X m (stamina N% | 3 barrages)", "Alfrik's Odin's Charge slash N lands on N",
+  "… ends after N of 3 blows: target out of reach", "Executioner: target out of reach … no chop",
+  "War Horn slows N; he is quickened for 6 s".
 
 0.9.11 (cloud, not built here; branch `cloud/phase2-fixes`, on top of 0.9.10):
 - Fjallbrjótr: a battle axe's swing (borrowed from vanilla `Battleaxe`, its sounds left out) is his normal attack; the

@@ -306,6 +306,23 @@ namespace Alfrik
             Anim(at + Vector3.up * 0.4f * scale, null, "p2_explosion", Color.white, 1.6f * scale, 0.5f);
         }
 
+        // One step of a ring bursting outward (Quake): eruptions all round the circle at that radius, about 2.6 m apart.
+        internal static void QuakeStep(Vector3 centre, float radius, bool first)
+        {
+            int count = Mathf.Clamp(Mathf.RoundToInt(2f * Mathf.PI * radius / 2.6f), 6, 20);
+            float turn = Random.Range(0f, Mathf.PI * 2f);
+            for (int i = 0; i < count; i++)
+            {
+                float angle = turn + i * Mathf.PI * 2f / count;
+                Vector3 p = centre + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * radius;
+                if (ZoneSystem.instance != null)
+                    p.y = ZoneSystem.instance.GetSolidHeight(p);
+                WaveStep(p, 0.8f);
+            }
+            Sounds.PlayAt(first ? "p2boom" : "p2rumble", centre, first ? 1f : 0.7f, 70f);
+            GameCamera.instance?.AddShake(centre, 20f, first ? 0.8f : 0.3f, false);
+        }
+
         // A shot flung back off the Iron Wall (ReturnedShot): a gold-hot glow riding on it, embers shed behind.
         internal static void ShotGlow(Transform shot, float life) =>
             Anim(shot.position, shot, "p2_fireball", Gold, 1.5f, life);
@@ -352,15 +369,15 @@ namespace Alfrik
                 GameCamera.instance?.AddShake(at, 30f, 1.5f, false);
                 return;
             }
-            // The bolt is a blink: the strike, its sparks and its light all gone within a quarter of a second.
+            // The bolt stays standing a moment after it strikes, flickering, then fades out slowly with its light.
             Sounds.PlayAt("thunder", at, 1f, 120f);
             Bolt(at);
             Burst(at + Vector3.up * 0.3f, null, "p1_spark", Storm, 30, 4f, 11f, 0.3f, 0.25f, 0.3f, 1f);
-            Flash(at + Vector3.up * 2f, null, Storm, 16f, 10f, 0.2f);
+            Flash(at + Vector3.up * 2f, null, Storm, 16f, 10f, BoltFade.Seconds);
             GameCamera.instance?.AddShake(at, 25f, 1f, false);
         }
 
-        // A jagged bolt from high above down to the ground, gone in a blink.
+        // A jagged bolt from high above down to the ground, fading out over BoltFade.Seconds.
         private static void Bolt(Vector3 ground)
         {
             var bolt = new GameObject("Alfrik_Bolt");
@@ -381,7 +398,7 @@ namespace Alfrik
             line.widthMultiplier = 0.6f;
             line.startColor = new Color(0.85f, 0.9f, 1f, 1f);
             line.endColor = Color.white;
-            Object.Destroy(bolt, 0.12f);
+            bolt.AddComponent<BoltFade>();
         }
 
         // A thrown axe biting into the ground.
@@ -582,6 +599,41 @@ namespace Alfrik
                 return;
             }
             transform.position = _marked.GetHeadPoint() + Vector3.up * (0.7f + Mathf.Sin(Time.time * 3f) * 0.08f);
+        }
+    }
+
+    // Odin's Wrath's bolt after it strikes: a flicker for its first moments, then it thins and dims away (its colour taken
+    // down too, so it fades whether its material blends by alpha or adds its light).
+    internal class BoltFade : MonoBehaviour
+    {
+        internal const float Seconds = 1.2f;
+        private LineRenderer _line;
+        private float _start, _width;
+        private Color _from, _to;
+
+        private void Start()
+        {
+            _line = GetComponent<LineRenderer>();
+            _start = Time.time;
+            _width = _line.widthMultiplier;
+            _from = _line.startColor;
+            _to = _line.endColor;
+        }
+
+        private void Update()
+        {
+            float t = (Time.time - _start) / Seconds;
+            if (t >= 1f || _line == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            float a = (1f - t) * (1f - t);
+            if (t < 0.25f && Random.value < 0.3f)
+                a *= 0.35f;
+            _line.widthMultiplier = _width * Mathf.Lerp(1f, 0.35f, t);
+            _line.startColor = new Color(_from.r * a, _from.g * a, _from.b * a, _from.a * a);
+            _line.endColor = new Color(_to.r * a, _to.g * a, _to.b * a, _to.a * a);
         }
     }
 
