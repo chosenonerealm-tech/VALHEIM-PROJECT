@@ -25,7 +25,7 @@ namespace Alfrik
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "local.alfrik";
-        public const string Version = "0.9.14";
+        public const string Version = "0.9.15";
 
         internal static ManualLogSource Log;
         internal static string Folder;

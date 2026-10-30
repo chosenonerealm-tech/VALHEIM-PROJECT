@@ -98,11 +98,27 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.14)
+## Current state (0.9.15)
 
-The roadmap the owner agreed to is in `PLAN.md`.
+The roadmap the owner agreed to is in `PLAN.md`. **His dialogue and on-screen texts are the owner's: do not change
+them.** The ending / resurrection (PLAN 0.13.0) goes to the local session, not the cloud one.
 
-0.9.14: the same code as 0.9.13 (not yet played), pushed with the owner's branch rules in this file.
+0.9.15 (cloud, not built here), from the owner's 0.9.14 test (`logs/2026-10-31_0258.log`):
+- Phase-1 shake: in fist mode he no longer presses on into the target while his own punch plays; the swing report now
+  says how many back-and-forth steps came within 1.6 m of his target.
+- His parry (both phases) fills the attacker's stagger bar (a hit, `ParryShock`; logged on their game: "X takes
+  Alfrik's parry shock"). Phase 1: then the leap, locked on the one he stunned ("Blade Catch leap lands on N").
+- Phase-1 chops (and the leap) turn with the target; Twin Reaper logs each chop ("Twin Reaper 1..3 / cross lands on N").
+- When a swing comes at him (phase 1): Blade Catch 40%, a roll 40%, takes it 20%.
+- A perfect parry staggers him at most once every 6 s ("combo cut by a parry (no stagger …)"); after it he reads the
+  parry: "reads the parry: Shoulder Charge | a held swing".
+- Up close: phase-2 bursts run on into a ready close move ("burst runs on into a finisher"), shorter pause after a
+  move with the target within 4 m; phase-1 bursts now and then into Twin Reaper; Huginn's Mark in phase 2 too.
+- Anti-cheese: nothing built hurts him ("shrugs off N blow(s) from built things"); no building within 40 m while he
+  fights (`Location.IsInsideNoBuildLocation`); Thunder Step when he gets no nearer for 3 s at 8 m+ (or the target is
+  2.5 m above/below), or when drawn 60 m from his ground ("Alfrik: Thunder Step (…)", "Thunder Step lands …").
+
+0.9.14, played (`logs/2026-10-31_0258.log`): the same code as 0.9.13, with the owner's branch rules in this file.
 
 0.9.13 (cloud, not built here; branch `cloud/demigod`, on top of 0.9.12 and its test log):
 - Health: [Boss] PhaseHealth default 10000 (an old 4000 is moved up; a hand-set value stays); new [Boss] PartyHealth,

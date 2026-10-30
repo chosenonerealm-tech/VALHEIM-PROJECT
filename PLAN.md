@@ -25,11 +25,12 @@ kill him and take his god weapons. One change set per test, as always (rules in 
 | Version | What | State |
 |---|---|---|
 | 0.9.13 | His hits connect: swings turn with the target (reach 3 m, 180 deg); Odin's Charge strike + impact ring; Odin's Wrath aimed ahead + a visible bolt; War Horn opens a combo; 10000 health per phase, +50% per extra player | built in the cloud |
-| 0.10.0 | Phase-2 combo picker (chains below, branches, feints) and **Thunder Step**: kept at a distance too long, he becomes lightning and strikes down beside you | next |
+| 0.9.15 | Owner's 0.9.14 test: phase-1 parry stuns and the leap punishes, the 6 s parry cap and parry reading, tracking axes, dodges, close-range finishers, Huginn's Mark in phase 2, anti-cheese (built things do not hurt him, no building within 40 m, **Thunder Step**, a 60 m leash) | built in the cloud |
+| 0.10.0 | Phase-2 combo picker (chains below, branches, feints) | next |
 | 0.10.x | **Mjölnir's Return**: Fjallbrjótr thrown past you, it comes back through you, he catches it into a Grave Ring | |
 | 0.11.0 | Phase-1 combos (Charge → Twin Reaper, Ravens' Flight → the Left Fist, …) and tracking axe swings | |
 | 0.12.0 | Late phase 2 (below ~30%): lightning falls about the arena, his combos run without pauses | |
-| 0.13.0 | **The ending**: when his last bar empties he kneels. Spare him (interact) and he joins you as now; strike him down and he dies and drops his 3 god weapons — Hugr, Hamr, Fjallbrjótr — as player weapons. A trinket comes later. | |
+| 0.13.0 | *(the local session's, not the cloud's)* **The ending**: when his last bar empties he kneels. Spare him (interact) and he joins you as now; strike him down and he dies and drops his 3 god weapons — Hugr, Hamr, Fjallbrjótr — as player weapons. A trinket comes later. | |
 
 ### Phase-2 combo ideas (0.10.0)
 

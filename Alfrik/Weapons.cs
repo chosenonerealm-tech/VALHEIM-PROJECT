@@ -68,6 +68,19 @@ namespace Alfrik
             shared.m_description = "Mind and shape: the twin axes of Alfrik, The Left Fist of Odin. No other hand can hold them.";
             shared.m_maxQuality = 1;
             shared.m_aiAttackInterval = 0.35f;
+            // A demigod's chops follow a moving target: he keeps turning through each one (a player turns at a fifth of that
+            // speed), and they reach a little further (0.9.14: Twin Reaper missed a moving player).
+            if (shared.m_attack != null)
+            {
+                shared.m_attack.m_speedFactorRotation = Mathf.Max(shared.m_attack.m_speedFactorRotation, 1f);
+                shared.m_attack.m_attackRange = Mathf.Max(shared.m_attack.m_attackRange, 2.6f);
+                // The leap (his heavy attack, the punish after his parry) turns with the one he stunned too, so it lands.
+                if (shared.m_secondaryAttack != null)
+                    shared.m_secondaryAttack.m_speedFactorRotation = Mathf.Max(shared.m_secondaryAttack.m_speedFactorRotation, 1f);
+                Plugin.Log.LogInfo("Hugr & Hamr chop: " + shared.m_attack.m_attackAnimation + " (" + shared.m_attack.m_attackType + ", reach " +
+                    shared.m_attack.m_attackRange.ToString("0.0") + " m, arc " + shared.m_attack.m_attackAngle.ToString("0") + " deg, turning " +
+                    shared.m_attack.m_speedFactorRotation.ToString("0.0") + ")");
+            }
             string models = Path.Combine(Plugin.Folder, "Models");
             Reskin(item.ItemPrefab, Path.Combine(models, AxeFile));
             Model hugr = AxeMaterial == null ? null : Load(Path.Combine(models, HugrFile));

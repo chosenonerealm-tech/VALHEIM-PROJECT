@@ -150,6 +150,7 @@ namespace Alfrik
                 case Act.Wrath: return Poses.Raise;
                 case Act.HornTell: return Poses.ArmsBack;
                 case Act.RushTell: return Poses.Crouch;
+                case Act.ThunderTell: return Poses.Raise;
                 default: return Poses.None;
             }
         }
@@ -169,6 +170,9 @@ namespace Alfrik
             _nextExecStomp = 0f;
             _barrages = 0;
             _hornUntil = 0f;
+            _homeSet = false;
+            _stuckTime = 0f;
+            _bestDist = float.MaxValue;
             _retribUntil = 0f;
             _retaliate = null;
             _waveAt = _splitAt = 0f;
@@ -238,6 +242,13 @@ namespace Alfrik
             // Retribution is a stance: while it lasts he starts nothing new, so he is free to answer every blow.
             if (Retribution)
                 return false;
+            // In a group he turns on whoever hurt him most lately (Huginn's Mark, as in phase 1).
+            if (now >= _nextMark && Enemies(c, 25f).Count >= 2)
+            {
+                _nextMark = now + 25f;
+                Mark(c);
+                return true;
+            }
             // FURY first when it is ready; otherwise one of the abilities ready and in range, at random, so they do not
             // always come in the same order.
             Act pick = Act.None;
@@ -628,10 +639,36 @@ namespace Alfrik
         // Iron Wall and Punishing Parry answer an attack (Defend2), never come on their own.
         private static void AfterBurst2(Humanoid c)
         {
+            // Up close a burst often runs straight on into one of his close moves that is ready, so standing at his side
+            // brings more than his ordinary swings.
+            float dist = _target != null ? Flat(_target.transform.position - c.transform.position).magnitude : float.MaxValue;
+            if (!Retribution && UnityEngine.Random.value < 0.4f && CloseFinisher(c, dist))
+                return;
             if (UnityEngine.Random.value < 0.45f)
                 Break(BreakMode.Hold, UnityEngine.Random.Range(0.6f, 1f));
             else
                 Break(BreakMode.Circle, UnityEngine.Random.Range(0.8f, 1.3f));
+        }
+
+        // A close move that is ready, straight after his burst (a combo's finisher): Executioner, Reaping Sweep, Grave Ring
+        // or FURY.
+        private static bool CloseFinisher(Humanoid c, float dist)
+        {
+            float now = Time.time;
+            _ready.Clear();
+            if (dist <= 3.2f && now >= _nextExec)
+                _ready.Add(Act.ExecTell);
+            if (dist <= 3.6f && now >= _nextSweep)
+                _ready.Add(Act.SweepTell);
+            if (dist <= 6f && now >= _nextRing)
+                _ready.Add(Act.RingTell);
+            if (dist <= 6f && now >= _nextFury)
+                _ready.Add(Act.FuryTell);
+            if (_ready.Count == 0)
+                return false;
+            Plugin.Log.LogInfo("Alfrik's burst runs on into a finisher");
+            StartMove(c, _ready[UnityEngine.Random.Range(0, _ready.Count)], dist, Vector3.zero);
+            return true;
         }
 
         private static void RunPhase2Act(Humanoid c, float dist, Vector3 toTarget)
@@ -911,6 +948,26 @@ namespace Alfrik
                         EndAct(c);
                     }
                     break;
+                case Act.ThunderTell:
+                    Drive(c, Vector3.zero, toTarget, false);
+                    if (now >= _actEnd)
+                    {
+                        // A bolt where he stood, and he is where the marked bolt falls.
+                        Fx.Send(Fx.ThunderStep);
+                        Vector3 from = c.transform.position;
+                        Place(c, _thunderTo);
+                        Rigidbody body = c.GetComponent<Rigidbody>();
+                        if (body != null)
+                            body.velocity = Vector3.zero;
+                        AirAltitude(c) = c.transform.position.y;
+                        Face(c, _target);
+                        Plugin.Log.LogInfo("Alfrik's Thunder Step lands " + Flat(_thunderTo - from).magnitude.ToString("0") + " m on" +
+                            (_target != null ? ", " + Flat(_target.transform.position - _thunderTo).magnitude.ToString("0.0") + " m from " +
+                                _target.GetHoverName() : ""));
+                        EndAct(c);
+                        _recoverUntil = now + 0.3f;
+                    }
+                    break;
                 case Act.RushTell:
                     Drive(c, Vector3.zero, toTarget, false);
                     if (now >= _actEnd)
@@ -964,6 +1021,112 @@ namespace Alfrik
                     }
                     break;
             }
+        }
+
+        // ---- Thunder Step (both phases) ----
+        // Kept from his target (a wall, a tower, a pit, deep water, a boat, or simply outrun) or drawn too far from his
+        // ground: he raises his weapon, a bolt is marked on the ground beside the target (or on his ground), and as it falls
+        // he is there. Getting nowhere means: free to move, 8 m or more off (or the target 2.5 m above or below him), and
+        // not 1.5 m closer for 3 s (twice as fast with the target above or below). cd 15 s.
+        private static float _stuckTime, _bestDist = float.MaxValue, _nextThunder;
+        private static Vector3 _home, _thunderTo;
+        private static bool _homeSet;
+        private static int _builtShrugged;
+        private const float LeashRange = 60f, StuckSeconds = 3f;
+        private static readonly Collider[] _nearPieces = new Collider[16];
+        private static int _pieceMask;
+
+        private static bool ThunderStep(Humanoid c, float dist)
+        {
+            float now = Time.time;
+            if (!_homeSet)
+            {
+                _home = c.transform.position;
+                _homeSet = true;
+            }
+            if (now < _nextThunder || _target == null)
+                return false;
+            string why;
+            Vector3 to;
+            float away = Flat(c.transform.position - _home).magnitude;
+            if (away > LeashRange)
+            {
+                if (!GroundBeside(_home, c.transform.position, 0f, out to) && !GroundBeside(_home, c.transform.position, 2f, out to))
+                    return false;
+                why = "drawn " + away.ToString("0") + " m from his ground";
+            }
+            else
+            {
+                float rise = _target.transform.position.y - c.transform.position.y;
+                bool apart = Mathf.Abs(rise) > 2.5f;
+                if (dist > 40f || (!apart && dist < 8f) || dist < _bestDist - 1.5f)
+                {
+                    _bestDist = dist;
+                    _stuckTime = 0f;
+                    return false;
+                }
+                _stuckTime += Time.deltaTime * (apart ? 2f : 1f);
+                if (_stuckTime < StuckSeconds)
+                    return false;
+                if (!GroundBeside(_target.transform.position, c.transform.position, 2f, out to))
+                {
+                    _stuckTime = 0f;
+                    _nextThunder = now + 3f;
+                    Plugin.Log.LogInfo("Alfrik's Thunder Step: no ground beside " + _target.GetHoverName());
+                    return false;
+                }
+                why = apart ? _target.GetHoverName() + " " + Mathf.Abs(rise).ToString("0.0") + " m " + (rise > 0f ? "above" : "below") + " him"
+                    : "no nearer to " + _target.GetHoverName() + " in " + StuckSeconds.ToString("0") + " s (" + dist.ToString("0") + " m)";
+            }
+            _thunderTo = to;
+            _nextThunder = now + 15f;
+            _stuckTime = 0f;
+            _bestDist = float.MaxValue;
+            // The bolt marked where he will be falls as the warning ends (Strikes' 0.9 s), and he comes with it.
+            Start(Act.ThunderTell, 0.9f);
+            Strikes.Send(c, to, Strikes.Lightning);
+            Sounds.PlayAt("thunder", c.GetCenterPoint(), 0.6f, 80f);
+            _moves++;
+            Plugin.Log.LogInfo("Alfrik: Thunder Step (" + why + ")");
+            return true;
+        }
+
+        // Room to stand on solid ground at that height, at that distance from the spot (on the side facing him first,
+        // then all round); 0 = the spot itself.
+        private static bool GroundBeside(Vector3 spot, Vector3 from, float distance, out Vector3 ground)
+        {
+            ground = spot;
+            if (ZoneSystem.instance == null)
+                return false;
+            if (_leapMask == 0)
+            {
+                _leapMask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "vehicle");
+                _arcMask = LayerMask.GetMask("Default", "static_solid", "Default_small", "piece", "terrain", "vehicle");
+            }
+            Vector3 toward = Flat(from - spot);
+            toward = toward.sqrMagnitude > 0.0001f ? toward.normalized : Vector3.forward;
+            foreach (float angle in new[] { 0f, 45f, -45f, 90f, -90f, 135f, -135f, 180f })
+            {
+                Vector3 p = spot + Quaternion.Euler(0f, angle, 0f) * toward * distance;
+                p.y = ZoneSystem.instance.GetSolidHeight(p);
+                if (Mathf.Abs(p.y - spot.y) > 1.5f || Physics.CheckCapsule(p + Vector3.up * 0.8f, p + Vector3.up * 1.7f, 0.4f, _leapMask))
+                    continue;
+                ground = p;
+                return true;
+            }
+            return false;
+        }
+
+        // A building piece within that distance (a trap, a fire, a wall).
+        private static bool PieceNear(Vector3 at, float radius)
+        {
+            if (_pieceMask == 0)
+                _pieceMask = LayerMask.GetMask("piece", "piece_nonsolid");
+            int count = Physics.OverlapSphereNonAlloc(at, radius, _nearPieces, _pieceMask, QueryTriggerInteraction.Collide);
+            for (int i = 0; i < count; i++)
+                if (_nearPieces[i] != null && _nearPieces[i].GetComponentInParent<Piece>() != null)
+                    return true;
+            return false;
         }
 
         // Close enough for a swing to reach (his ordinary reach and a little).

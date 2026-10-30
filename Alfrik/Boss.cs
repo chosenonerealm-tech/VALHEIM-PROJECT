@@ -157,6 +157,11 @@ namespace Alfrik
             harmony.Patch(AccessTools.Method(typeof(BaseAI), "UpdateRegeneration"), prefix: new HarmonyMethod(typeof(AlfrikBoss), nameof(NoRegeneration)));
             harmony.Patch(AccessTools.Method(viking, "Interact"), prefix: new HarmonyMethod(typeof(AlfrikBoss), nameof(NoTalking)));
             harmony.Patch(AccessTools.Method(viking, "UseItem"), prefix: new HarmonyMethod(typeof(AlfrikBoss), nameof(NoTalking)));
+            MethodInfo noBuild = AccessTools.Method(typeof(Location), "IsInsideNoBuildLocation", new[] { typeof(Vector3) });
+            if (noBuild != null)
+                harmony.Patch(noBuild, postfix: new HarmonyMethod(typeof(AlfrikBoss), nameof(NoBuildNearHim)));
+            else
+                Plugin.Log.LogWarning("Alfrik: no Location.IsInsideNoBuildLocation; building near him is not stopped");
             Brain.Init(harmony, viking);
             Plugin.Log.LogInfo(name + ", " + Title + ": " + Phases.Length + " boss phase(s), then a Berserker companion (console: " +
                 name.Replace(" ", "").ToLowerInvariant() + ")");
@@ -431,6 +436,22 @@ namespace Alfrik
                     break;
             }
             KeepWeapon();
+        }
+
+        private const float NoBuildRange = 40f;
+        private static bool _noBuildLogged;
+
+        // Location.IsInsideNoBuildLocation postfix, on every game: while he fights as the boss nothing can be built within
+        // 40 m of him - no walls, fires or traps put up mid-fight (the game shows its own no-build mark).
+        private static void NoBuildNearHim(Vector3 __0, ref bool __result)
+        {
+            if (__result || _state != 1 || _char == null || _char.IsDead() || Vector3.Distance(__0, _char.transform.position) > NoBuildRange)
+                return;
+            __result = true;
+            if (_noBuildLogged)
+                return;
+            _noBuildLogged = true;
+            Plugin.Log.LogInfo("Building is stopped within " + NoBuildRange.ToString("0") + " m of Alfrik while he fights");
         }
 
         private static int _healthFixes;

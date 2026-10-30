@@ -10,7 +10,7 @@ namespace Alfrik
             Ravens = 9, Punch = 10, Hook = 11, Catch = 12, Cleave = 13, WarCry = 14, Shoulder = 15, Bloodscent = 16,
             Descend = 17, Land = 18, Swap = 19, WallUp = 20, Block = 21, GuardBreak = 22, Glint = 23, Sweep = 24,
             ExecFlash = 26, Fury = 27, FurySlash = 28, Swing2 = 29, Hit2 = 30, Stunned = 31, Leap = 32, FallLand = 33,
-            StompHit = 34, Returned = 35, IronSkin = 36, Horn = 37, StoneBreak = 38;
+            StompHit = 34, Returned = 35, IronSkin = 36, Horn = 37, StoneBreak = 38, ThunderStep = 39;
         private static readonly Color Storm = new Color(0.75f, 0.85f, 1f, 1f);
         private const string Rpc = "Alfrik_Fx";
 
@@ -258,6 +258,10 @@ namespace Alfrik
                     Ring(feet + Vector3.up * 0.1f, "p1_firering", Color.white, 0f, 1, 0f, 1.2f, 1f, 30f);
                     Flash(centre, body.transform, Red, 8f, 6f);
                     GameCamera.instance?.AddShake(feet, 40f, 1.5f, false);
+                    break;
+                case ThunderStep:
+                    // Thunder Step: he goes up in a bolt where he stood.
+                    StrikeBurst(feet, Strikes.Lightning);
                     break;
                 case Returned:
                     // A shot caught on the Iron Wall, flung back: steel ringing and a burst of gold.

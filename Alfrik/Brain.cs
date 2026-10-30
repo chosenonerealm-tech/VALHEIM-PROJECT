@@ -17,13 +17,17 @@ namespace Alfrik
     //  Hound's Chase  - sprints after a target more than 10 m away, until it is within 6 m.
     //  Charge         - sprints at a target 4.5-9 m away, bending toward it while it is ahead, and chops twice as he
     //                   arrives (no swings if he ran past). Cannot be blocked while it runs.
-    //  As a boss every perfect parry cuts his combo and staggers him, a full stagger bar too (once per 8 s);
+    //  As a boss every perfect parry cuts his combo; it staggers him at most once every 6 s, and he reads it (his next
+    //  answer is the Shoulder Charge or a swing held a beat). A full stagger bar staggers him too (once per 8 s);
     //  a plain block costs the blocker 10 more stamina; his hits fill the stagger bar of who he hits by [Boss]
     //  StaggerOnYou. Only the Charge, the Twin Reaper cross, his counter and the Shoulder Charge cannot be blocked.
     //  Twin Reaper    - now and then, never on a fixed beat, one warning in five a feint: plants his feet with a rune flash, then four quick chops,
     //                   the last, the red cross-slash, cannot be blocked: block three, dodge the cross.
     //  Blade Catch    - only against a swing coming at him: raises the axes in a guard with a rune flash. A melee hit in that guard is parried: no damage,
-    //                   the attacker staggers and loses stamina, and his counter (the leap) cannot be blocked.
+    //                   the attacker is stunned (stagger bar filled) and loses stamina, and his counter (the leap, turning with
+    //                   them) cannot be blocked. When a swing comes at him: Blade Catch 40%, a roll 40%.
+    //  Thunder Step   - (both phases) kept from his target or drawn 60 m from his ground: a bolt is marked beside the target
+    //                   and he strikes down with it. As the boss nothing built hurts him, and nothing is built within 40 m.
     //  The leap (the axes' heavy attack) is only ever a punish on a staggered enemy in reach (NoBlindLeap).
     //                   Thrown and shot things still hit.
     //  Flying Hatchet - cocks his arm back with a rune flash and throws Hamr, which comes back to him (Hatchet).
@@ -44,7 +48,7 @@ namespace Alfrik
         private enum Act { None, Charge, TwinTell, TwinChain, Guard, Throw, Break, RavensTell, Fists, Shoulder,
             Wall, ParryStance, SweepTell, ExecTell, FuryTell, FuryChain,
             SweepChain, FallTell, Fall, FallLand, SplitTell, Split, StompTell,
-            ExecFollow, RetribTell, RingTell, Ring, WrathTell, Wrath, HornTell, Horn, Advance, RushTell, Rush }
+            ExecFollow, RetribTell, RingTell, Ring, WrathTell, Wrath, HornTell, Horn, Advance, RushTell, Rush, ThunderTell }
         private enum BreakMode { Hold, Circle, Back }
 
         private const float Reach = 2.6f, ParryStaminaBreak = 40f;
@@ -75,10 +79,10 @@ namespace Alfrik
         private static bool _parryStagger;
         private static bool _swingAnswered;
         private static int _rollMask;
-        private static int _equips, _equipTraces, _swingFrames, _turnFlips, _stepFlips, _speedChanges, _staggers;
+        private static int _equips, _equipTraces, _swingFrames, _turnFlips, _stepFlips, _contactFlips, _speedChanges, _staggers;
         private static float _nextReport, _watchYaw = float.NaN, _watchTurn, _watchSpeed = 1f, _nextStagger;
         private static Vector3 _watchPos, _watchStep;
-        private static Character _staggerVictim, _lastFoe, _perfectParrier;
+        private static Character _staggerVictim, _lastFoe, _perfectParrier, _punished;
         private static readonly AccessTools.FieldRef<MonsterAI, float> SinceAttacking = AccessTools.FieldRefAccess<MonsterAI, float>("m_timeSinceAttacking");
         private static readonly AccessTools.FieldRef<MonsterAI, float> Unreachable = AccessTools.FieldRefAccess<MonsterAI, float>("m_unableToAttackTargetTimer");
         private static readonly AccessTools.FieldRef<Character, Vector3> MoveDirOf = AccessTools.FieldRefAccess<Character, Vector3>("m_moveDir");
@@ -228,6 +232,9 @@ namespace Alfrik
             }
             _ai = c.GetBaseAI() as MonsterAI;
             _target = _ai == null ? null : _ai.GetTargetCreature();
+            // Punishing a stun: on the one he stunned until it is over, whoever else the AI or Huginn's Mark would pick.
+            if (Time.time < _punishUntil && _punished != null && !_punished.IsDead())
+                _target = _punished;
             KeepAggro(c);
             TrackTarget();
             float dist = _target == null ? float.MaxValue : Flat(_target.transform.position - c.transform.position).magnitude;
@@ -307,6 +314,9 @@ namespace Alfrik
             }
             if (_target == null || attacking)
                 return;
+            // Kept from his target or drawn away from his ground: Thunder Step.
+            if (boss && ThunderStep(c, dist))
+                return;
             if (recovering)
             {
                 if (close)
@@ -321,6 +331,24 @@ namespace Alfrik
             }
             if (Time.time >= _nextAbility && (Phase2 ? Choose2(c, dist) : Choose(c, dist)))
                 return;
+            // Phase 1, just parried: he reads it. Half the time the bash that cannot be blocked, otherwise his next swing comes
+            // a beat late.
+            if (!Phase2 && Time.time < _readParryUntil && dist <= 2.6f)
+            {
+                _readParryUntil = 0f;
+                if (UnityEngine.Random.value < 0.5f)
+                {
+                    _nextShoulder = Time.time + 10f;
+                    _shoulderHit = false;
+                    _shoulderAt = 0f;
+                    Start(Act.Shoulder, Tell(0.3f));
+                    Face(c, _target);
+                    Plugin.Log.LogInfo("Alfrik reads the parry: Shoulder Charge");
+                    return;
+                }
+                _nextPressure = Time.time + UnityEngine.Random.Range(0.35f, 0.6f);
+                Plugin.Log.LogInfo("Alfrik reads the parry: a held swing");
+            }
             if (dist <= 2.4f && Time.time >= _nextShoulder && (_target.IsBlocking() || UnityEngine.Random.value < 0.004f))
             {
                 // Phase 2's Shoulder Breaker is the same bash from a shorter step.
@@ -405,6 +433,17 @@ namespace Alfrik
             if (Phase2)
             {
                 AfterBurst2(c);
+                return;
+            }
+            // Up close a burst now and then runs straight on into Twin Reaper, if it is ready.
+            if (_target != null && !_target.IsStaggering() && Time.time >= _nextTwin && UnityEngine.Random.value < 0.3f &&
+                Flat(_target.transform.position - c.transform.position).magnitude <= 3.6f)
+            {
+                _nextTwin = Time.time + 9f;
+                _nextClose = Time.time + UnityEngine.Random.Range(2.5f, 4.5f);
+                Fx.Send(Fx.Rune);
+                Start(Act.TwinTell, Tell(0.4f));
+                Plugin.Log.LogInfo("Alfrik: Twin Reaper (his burst runs on into it)");
                 return;
             }
             if (UnityEngine.Random.value < 0.35f && _target != null && Roll(c, _target))
@@ -561,7 +600,8 @@ namespace Alfrik
             _swingAnswered = true;
             _nextDodgeScan = now + 0.5f;
             float roll = UnityEngine.Random.value;
-            if (_act != Act.Fists && Time.time >= _nextGuard && Flat(threat.transform.position - c.transform.position).magnitude <= 3.6f && roll < 0.6f)
+            // Blade Catch 40%, a roll 40%, he takes it 20% (Blade Catch not ready, out of reach or in his fists: a roll 80%).
+            if (_act != Act.Fists && Time.time >= _nextGuard && Flat(threat.transform.position - c.transform.position).magnitude <= 3.6f && roll < 0.4f)
             {
                 EndAct(c);
                 _target = threat;
@@ -774,7 +814,7 @@ namespace Alfrik
                     {
                         if (_swings == 3)
                             Unblockable(1.2f);
-                        if (Swing(c, false))
+                        if (Swing(c, false, _swings == 3 ? "Twin Reaper cross" : "Twin Reaper " + (_swings + 1)))
                         {
                             if (_swings == 3)
                                 Fx.Send(Fx.Slash);
@@ -894,7 +934,11 @@ namespace Alfrik
                 // Phase 2: the next move waits a moment after this one ends (not after it began), so his ordinary swings
                 // come between his moves instead of one move straight after another.
                 if (Phase2 && _act != Act.None && _act != Act.Wall && _act != Act.ParryStance && _act != Act.Break)
-                    _nextAbility = Mathf.Max(_nextAbility, Time.time + UnityEngine.Random.Range(2.5f, 4f));
+                {
+                    // Shorter with the target at his side, so holding close to him does not buy only his ordinary swings.
+                    bool near = _target != null && Flat(_target.transform.position - c.transform.position).magnitude <= 4f;
+                    _nextAbility = Mathf.Max(_nextAbility, Time.time + (near ? UnityEngine.Random.Range(1f, 2f) : UnityEngine.Random.Range(2.5f, 4f)));
+                }
                 if (_act != Act.None)
                     c.SetMoveDir(Vector3.zero);
             }
@@ -938,6 +982,14 @@ namespace Alfrik
             }
             if (hit == null || __instance != AlfrikBoss.Char)
                 return true;
+            // As the boss nothing built hurts him (traps, stakes, fires, turrets): a blow with no one behind it that is a shot
+            // (a turret's) or comes from beside a building piece.
+            if (AlfrikBoss.State == 1 && hit.GetAttacker() == null &&
+                (hit.m_ranged || PieceNear(hit.m_point, 3f) || PieceNear(__instance.transform.position, 2f)))
+            {
+                _builtShrugged++;
+                return false;
+            }
             // Retribution: a melee hit close by is answered with a sweep as soon as he is free (Think).
             if (Retribution && !hit.m_ranged && hit.GetAttacker() is Character striker &&
                 Flat(striker.transform.position - __instance.transform.position).magnitude <= 4.5f)
@@ -957,16 +1009,41 @@ namespace Alfrik
             bool punishing = _act == Act.ParryStance;
             EndAct(c);
             Fx.Send(Fx.Parry);
-            Plugin.Log.LogInfo((punishing ? "Alfrik's Punishing Parry caught " : "Alfrik's Blade Catch parried ") + attacker.GetHoverName());
+            Plugin.Log.LogInfo((punishing ? "Alfrik's Punishing Parry caught " : "Alfrik's Blade Catch parried ") + attacker.GetHoverName() +
+                ": stunned");
             attacker.Stagger(Flat(attacker.transform.position - c.transform.position).normalized);
+            ParryShock(c, attacker);
             if (attacker is Player player)
                 player.UseStamina(ParryStaminaBreak);
             Unblockable(1.5f);
+            // The punish goes at the one he stunned and stays on them (Huginn's Mark waits until it is over): in phase 1
+            // the leap (his heavy attack), turning with them, in phase 2 the slam.
             _target = attacker;
+            _punished = attacker;
+            _punishUntil = Time.time + 1.5f;
             _heavyUntil = Time.time + 0.3f;
-            Swing(c, true, punishing ? "Punishing Parry counter" : "Blade Catch counter");
+            Swing(c, true, punishing ? "Punishing Parry counter" : "Blade Catch leap");
             _nextAbility = Time.time + 0.5f;
             return false;
+        }
+
+        // His parry's shock: a blow of no real weight whose stagger fills the attacker's stagger bar (a stun), sent as a hit
+        // so it reaches their own game; whoever takes it logs it there (HitBy).
+        private const float ParryShockStagger = 100000f;
+
+        private static void ParryShock(Humanoid c, Character attacker)
+        {
+            Vector3 away = Flat(attacker.transform.position - c.transform.position);
+            var hit = new HitData();
+            hit.m_damage.m_blunt = 5f;
+            hit.m_point = attacker.GetCenterPoint();
+            hit.m_dir = away.sqrMagnitude > 0.0001f ? away.normalized : c.transform.forward;
+            hit.m_pushForce = 0f;
+            hit.m_staggerMultiplier = ParryShockStagger;
+            hit.m_blockable = false;
+            hit.m_dodgeable = false;
+            hit.SetAttacker(c);
+            attacker.Damage(hit);
         }
 
         private static readonly int StateKey = "sc_alfrik".GetStableHashCode();
@@ -1046,7 +1123,7 @@ namespace Alfrik
         // landed. He fights with his fists for 6-9 s (or less if the target gets away), then goes and pulls them out,
         // Hugr first unless Hamr is nearer; with Hugr in his hand again he stops punching. An axe he cannot reach flies
         // back to him after 40 s.
-        private static float _fetchAt, _stunUntil, _stunLength = 1.3f, _shoulderAt;
+        private static float _fetchAt, _stunUntil, _stunLength = 1.3f, _shoulderAt, _nextParryStagger, _readParryUntil, _punishUntil;
 
         private static void StartFists()
         {
@@ -1097,7 +1174,10 @@ namespace Alfrik
                 Drive(c, Vector3.zero, c.transform.forward, false);
                 return;
             }
-            Drive(c, dist > 1.5f ? toTarget : Vector3.zero, toTarget, dist > 1.5f);
+            // Not pressing on into the target while his own punch plays: that drove him into them and the push back made
+            // him step back and forth (the 0.9.14 traces).
+            bool striking = c.InAttack();
+            Drive(c, dist > 1.5f && !striking ? toTarget : Vector3.zero, toTarget, dist > 1.5f && !striking);
             if (unarmed)
                 Punch(c, dist, now);
         }
@@ -1374,6 +1454,8 @@ namespace Alfrik
             _burstLeft = 0;
             _afterBurst = false;
             _flinchUntil = Time.time + 0.5f;
+            // He reads the parry: his next answer (Think) is for it.
+            _readParryUntil = Time.time + 4f;
             if (!c.IsStaggering())
             {
                 _parryStagger = true;
@@ -1420,9 +1502,17 @@ namespace Alfrik
                 return false;
             if (!_parryStagger && Time.time < _nextStagger)
                 return false;
+            // A perfect parry cuts his combo every time (OnFlinch), but staggers him at most once every 6 s.
+            if (_parryStagger && Time.time < _nextParryStagger)
+            {
+                Plugin.Log.LogInfo("Alfrik's combo cut by a parry (no stagger: one every 6 s)");
+                return false;
+            }
             if (!__instance.IsStaggering())
             {
                 _nextStagger = Time.time + 8f;
+                if (_parryStagger)
+                    _nextParryStagger = Time.time + 6f;
                 _stunLength = _parryStagger ? 1.6f : 1.3f;
                 _stunUntil = Time.time + _stunLength;
                 EndAct(AlfrikBoss.Char);
@@ -1444,6 +1534,8 @@ namespace Alfrik
             _crushDir = hit != null ? hit.m_dir : Vector3.zero;
             _healthBefore = __instance != null ? __instance.GetHealth() : 0f;
             _fistVictim = boss != null && boss.GetInt(PhaseKey, 1) == 1 && hit.m_skill == Skills.SkillType.Unarmed ? __instance : null;
+            if (boss != null && hit.m_staggerMultiplier >= ParryShockStagger && __instance != null)
+                Plugin.Log.LogInfo(__instance.GetHoverName() + " takes Alfrik's parry shock (stagger bar filled)");
         }
 
         // Phase 2: a blow of his that hurt (the health went down) leaves the one hit stunned - staggered every time.
@@ -1547,7 +1639,12 @@ namespace Alfrik
                     _watchTurn = turn;
                 Vector3 step = Flat(pos - _watchPos);
                 if (step.magnitude > 0.01f && _watchStep.magnitude > 0.01f && Vector3.Dot(step, _watchStep) < 0f)
+                {
                     _stepFlips++;
+                    // Pressed against his target (bodies touching), or out in the open.
+                    if (_target != null && Flat(_target.transform.position - pos).magnitude < 1.6f)
+                        _contactFlips++;
+                }
                 if (step.magnitude > 0.01f)
                     _watchStep = step;
                 if (Mathf.Abs(speed - _watchSpeed) > 0.01f)
@@ -1606,13 +1703,17 @@ namespace Alfrik
                 Plugin.Log.LogInfo("Alfrik re-equipped " + _equips + " times in 15 s");
             if (_swingFrames > 0)
                 Plugin.Log.LogInfo("Alfrik swings, 15 s: " + _swingFrames + " frames, turn reversals " + _turnFlips + ", back-and-forth steps " +
-                    _stepFlips + ", animation speed changes " + _speedChanges + ", stagger bar " + _staggers + " stagger(s)");
+                    _stepFlips + " (" + _contactFlips + " within 1.6 m of his target), animation speed changes " + _speedChanges +
+                    ", stagger bar " + _staggers + " stagger(s)");
             // How busy he is: moves begun, swings begun (slams among them), and hit frames reached (a swing whose animation
             // never plays reaches none).
+            if (_builtShrugged > 0)
+                Plugin.Log.LogInfo("Alfrik shrugs off " + _builtShrugged + " blow(s) from built things in 15 s");
+            _builtShrugged = 0;
             if (AlfrikBoss.State == 1 && (_moves > 0 || _swingsStarted > 0))
                 Plugin.Log.LogInfo("Alfrik's pace, 15 s: " + _moves + " move(s), " + _swingsStarted + " swing(s) (" + _slams + " slam(s)), " +
                     _impacts + " hit frame(s)");
-            _equips = _swingFrames = _turnFlips = _stepFlips = _speedChanges = _staggers = 0;
+            _equips = _swingFrames = _turnFlips = _stepFlips = _contactFlips = _speedChanges = _staggers = 0;
             _moves = _swingsStarted = _slams = _impacts = 0;
         }
     }
