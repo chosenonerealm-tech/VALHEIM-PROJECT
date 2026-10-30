@@ -12,7 +12,7 @@ namespace Alfrik
     // pose to his ZDO; [Poses] TellPoses turns them off.
     internal static class Poses
     {
-        internal const int None = 0, Crouch = 1, Cross = 2, ArmsBack = 3, Dive = 4, Landing = 5, Twist = 6, Reach = 7, Raise = 8, Plant = 9, Reel = 10,
+        internal const int None = 0, Crouch = 1, Cross = 2, ArmsBack = 3, Dive = 4, Landing = 5, Twist = 6, Raise = 8, Plant = 9, Reel = 10,
             Stomp = 11;
         private static readonly int PoseKey = "alfrik_pose".GetStableHashCode();
         internal static readonly AccessTools.FieldRef<Character, Animator> AnimatorOf = AccessTools.FieldRefAccess<Character, Animator>("m_animator");
@@ -56,13 +56,6 @@ namespace Alfrik
             {
                 ("Spine Twist Left-Right", 0.3f), ("Chest Twist Left-Right", 0.25f),
                 ("Left Arm Front-Back", -0.2f), ("Right Arm Front-Back", -0.3f),
-            },
-            // Bearded Hook: both arms reaching forward with the axe.
-            [Reach] = new[]
-            {
-                ("Spine Front-Back", 0.15f),
-                ("Left Arm Front-Back", 0.3f), ("Right Arm Front-Back", 0.4f),
-                ("Left Forearm Stretch", 0.25f), ("Right Forearm Stretch", 0.3f),
             },
             // Executioner: the axe raised high over his head, chest back.
             [Raise] = new[]

@@ -25,7 +25,7 @@ namespace Alfrik
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "local.alfrik";
-        public const string Version = "0.9.9";
+        public const string Version = "0.9.10";
 
         internal static ManualLogSource Log;
         internal static string Folder;
@@ -39,7 +39,6 @@ namespace Alfrik
         internal static ConfigEntry<bool> TellPoses, AlignAxes;
         internal static ConfigEntry<float> StaggerOnYou;
         internal static ConfigEntry<string> Offering, StoneRecipe;
-        internal static ConfigEntry<float> BleedPerSecond, BleedSeconds;
 
         private Harmony _harmony;
 
@@ -67,8 +66,6 @@ namespace Alfrik
             HiddenArmorPerBoss = Admin("Boss", "HiddenArmorPerBoss", 0f, "Extra hidden armour for every boss defeated.");
             StaggerOnYou = Admin("Boss", "StaggerOnYou", 0.3f,
                 "How much his hits (blocked or not) fill your stagger bar, against a normal hit of that size (1 = normal).");
-            BleedPerSecond = Admin("Boss", "BleedPerSecond", 8f, "Phase 2: health lost every second while bleeding from a Skeggöld cut (0 = no bleed).");
-            BleedSeconds = Admin("Boss", "BleedSeconds", 6f, "Phase 2: how long a Skeggöld cut bleeds; a new cut starts it again.");
             CompanionHealth = Admin("Companion", "Health", 1500f, "His health as your companion in a world with no boss defeated.");
             CompanionHealthPerBoss = Admin("Companion", "HealthPerBoss", 1000f, "Extra companion health for every boss defeated.");
             AxeScale = Config.Bind("Hugr & Hamr", "Scale", 1f, "Size of the axes in his hands. Applies at once.");
@@ -112,9 +109,7 @@ namespace Alfrik
             RuneStone.Register();
             HeldAxes.Hook();
             BackWeapons.Hook();
-            Bleed.Register();
             Slow.Register();
-            SE_AlfrikHook.Register();
             Jotunn.Managers.CommandManager.Instance.AddConsoleCommand(new SummonCommand());
         }
 

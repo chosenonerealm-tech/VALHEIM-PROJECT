@@ -35,7 +35,7 @@ namespace Alfrik
         // His damage on the swing under way (FURY's chops grow); read by AlfrikBoss.DamageDealt.
         internal static float SwingBoost = 1f;
 
-        private static float _heavyUntil, _nextWall, _nextParry2, _nextSweep, _nextHook, _nextExec, _nextFury, _waveAt;
+        private static float _heavyUntil, _nextWall, _nextParry2, _nextSweep, _nextExec, _nextFury, _waveAt;
         private static int _wallBlocks;
         private static float _nextFall, _nextSplit, _nextStomp, _splitAt, _behindSince = -1f;
         private static Vector3 _leapFrom, _leapTo;
@@ -64,7 +64,6 @@ namespace Alfrik
                 case Act.Guard: return Poses.Cross;
                 case Act.RavensTell: return Poses.ArmsBack;
                 case Act.SweepTell: return Poses.Twist;
-                case Act.HookTell: return Poses.Reach;
                 case Act.ExecTell: return Poses.Raise;
                 case Act.FuryTell: return Poses.Plant;
                 case Act.FallTell: return Poses.Crouch;
@@ -84,7 +83,7 @@ namespace Alfrik
         private static void NewPhase2()
         {
             _nextFury = Time.time + 12f;
-            _nextWall = _nextParry2 = _nextSweep = _nextHook = _nextExec = _nextStomp = 0f;
+            _nextWall = _nextParry2 = _nextSweep = _nextExec = _nextStomp = 0f;
             _nextFall = Time.time + 6f;
             _nextSplit = Time.time + 4f;
             // The new ones come in over the first half minute, not all at once.
@@ -539,14 +538,6 @@ namespace Alfrik
                         _recoverUntil = now + 0.5f;
                     }
                     break;
-                case Act.HookTell:
-                    Drive(c, Vector3.zero, toTarget, false);
-                    if (now >= _actEnd)
-                    {
-                        Hook(c);
-                        EndAct(c);
-                    }
-                    break;
                 case Act.ExecTell:
                     Drive(c, Vector3.zero, toTarget, false);
                     if (_swings == 0 && now >= _actStart + (_actEnd - _actStart) * 0.7f)
@@ -693,32 +684,6 @@ namespace Alfrik
                         EndAct(c);
                     break;
             }
-        }
-
-        // The beard of the axe drags whoever stands in front of him to his feet; the next chop follows at once.
-        private static void Hook(Humanoid c)
-        {
-            foreach (Character enemy in InFront(c, 5.5f, 60f))
-            {
-                Vector3 toHim = Flat(c.transform.position - enemy.transform.position);
-                var hit = new HitData();
-                hit.m_damage.m_pierce = 25f;
-                hit.ApplyModifier(c.GetRandomSkillFactor(Skills.SkillType.Axes));
-                hit.m_point = enemy.GetCenterPoint();
-                hit.m_dir = toHim.sqrMagnitude > 0.0001f ? toHim.normalized : -c.transform.forward;
-                // The pull itself is the Hooked status effect on their own game (SE_AlfrikHook), like the harpoon's.
-                hit.m_pushForce = 0f;
-                hit.m_statusEffectHash = SE_AlfrikHook.Hash;
-                hit.m_staggerMultiplier = 0.5f;
-                hit.m_blockable = true;
-                hit.m_dodgeable = true;
-                hit.m_skill = Skills.SkillType.Axes;
-                hit.SetAttacker(c);
-                enemy.Damage(hit);
-                Fx.SendAt(Fx.BeardHook, enemy.GetCenterPoint());
-            }
-            _burstLeft = 1;
-            _nextPressure = Time.time + 0.35f;
         }
 
         // Character.RPC_Damage (through OnHit) while the Iron Wall is up.

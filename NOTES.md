@@ -85,7 +85,11 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.9)
+## Current state (0.9.10)
 
-Built and installed, not yet played: the vanilla sledge slam effect/sound restored and its area 1.5× wider, weapons on
-his back, companion weapon choice. Last played: 0.9.8 (`logs/2026-10-29_v0.9.8_sledge-fight.log`).
+0.9.10 (cloud, not built here): the unused phase-2 Bleed (`Bleed.cs`, [Boss] BleedPerSecond/BleedSeconds) and Bearded
+Hook (`HookPull.cs`, `HookChain.cs`, its pose and effect) removed; the stun on every blow that hurts replaces the
+bleed. Their files in the plugin folder (`Audio/p2bleed*`, `Audio/p2chain*`, the `p2_blood` texture) are now unused.
+
+0.9.9, built and installed, not yet played: the vanilla sledge slam effect/sound restored and its area 1.5× wider,
+weapons on his back, companion weapon choice. Last played: 0.9.8 (`logs/2026-10-29_v0.9.8_sledge-fight.log`).

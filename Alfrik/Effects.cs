@@ -8,7 +8,7 @@ namespace Alfrik
     {
         internal const int Rune = 1, Parry = 2, Roar = 3, Dodge = 4, Slash = 5, Hit = 6, Yield = 7, Charge = 8,
             Ravens = 9, Punch = 10, Hook = 11, Catch = 12, Cleave = 13, WarCry = 14, Shoulder = 15, Bloodscent = 16,
-            Descend = 17, Land = 18, Swap = 19, WallUp = 20, Block = 21, GuardBreak = 22, Glint = 23, Sweep = 24, BeardHook = 25,
+            Descend = 17, Land = 18, Swap = 19, WallUp = 20, Block = 21, GuardBreak = 22, Glint = 23, Sweep = 24,
             ExecFlash = 26, Fury = 27, FurySlash = 28, Swing2 = 29, Hit2 = 30, Stunned = 31, Leap = 32, FallLand = 33,
             StompHit = 34, Returned = 35, IronSkin = 36, Horn = 37, StoneBreak = 38;
         private static readonly Color Storm = new Color(0.75f, 0.85f, 1f, 1f);
@@ -173,13 +173,6 @@ namespace Alfrik
                 case Sweep:
                     Sounds.PlayAt("p2swing", centre, 1f, 45f);
                     Sounds.PlayAt("p2growl", centre, 0.5f, 40f);
-                    break;
-                case BeardHook:
-                    HookChain.Show(body as Humanoid, at);
-                    Sounds.PlayAt("p2chain", at, 1f, 40f);
-                    Sounds.PlayAt("p2hit", at, 0.7f, 40f);
-                    Sprite(at, forward, "p2_blood", Color.white, 1.4f, 0.4f);
-                    Burst(at, null, "p1_dust", Dust, 8, 1f, 3f, 0.5f, 0.6f, 0.3f, 0.4f, grow: true);
                     break;
                 case ExecFlash:
                     Sounds.PlayAt("p2growl", centre, 1f, 50f);

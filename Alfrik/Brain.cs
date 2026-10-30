@@ -42,7 +42,7 @@ namespace Alfrik
     internal static partial class Brain
     {
         private enum Act { None, Charge, TwinTell, TwinChain, Guard, Throw, Break, RavensTell, Fists, Shoulder,
-            Wall, ParryStance, SweepTell, HookTell, ExecTell, FuryTell, FuryChain,
+            Wall, ParryStance, SweepTell, ExecTell, FuryTell, FuryChain,
             SweepChain, FallTell, Fall, FallLand, SplitTell, Split, StompTell,
             ExecFollow, RetribTell, RingTell, Ring, WrathTell, Wrath, HornTell, Horn, Advance }
         private enum BreakMode { Hold, Circle, Back }
