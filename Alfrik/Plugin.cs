@@ -25,13 +25,13 @@ namespace Alfrik
     public class Plugin : BaseUnityPlugin
     {
         public const string Guid = "local.alfrik";
-        public const string Version = "0.9.12";
+        public const string Version = "0.9.13";
 
         internal static ManualLogSource Log;
         internal static string Folder;
 
         internal static ConfigEntry<string> VrmVikingName;
-        internal static ConfigEntry<float> PhaseHealth, PhaseHealthPerBoss, BossDamageAtStart, BossDamagePerBoss, BossDamageMax, MaxHitShare;
+        internal static ConfigEntry<float> PhaseHealth, PhaseHealthPerBoss, PartyHealth, BossDamageAtStart, BossDamagePerBoss, BossDamageMax, MaxHitShare;
         internal static ConfigEntry<float> HiddenArmor, HiddenArmorPerBoss, CompanionHealth, CompanionHealthPerBoss;
         internal static ConfigEntry<float> AxeScale;
         internal static ConfigEntry<Vector3> AxeRotation, AxeOffset, AxeLeftRotation, EyeAdjust, BackOffset;
@@ -52,8 +52,17 @@ namespace Alfrik
                 "The one Vikings for Hire viking with this name wears the VRM avatar Valheim/ValheimVRM/<name>.vrm (with " +
                 "settings_<name>.txt) and is the boss. The console command is this name in lower case. Everyone in the " +
                 "group needs the same files. Empty = off. Restart required.");
-            PhaseHealth = Admin("Boss", "PhaseHealth", 4000f, "Health of each boss phase (an endgame boss). Every phase has its own full health bar.");
+            PhaseHealth = Admin("Boss", "PhaseHealth", 10000f,
+                "Health of each boss phase (a demigod: two phases of 10000 is the hardest vanilla boss's 20000). Every phase has its own full health bar.");
+            // 0.9.13: the old default (4000) moves up to the new one; a value set by hand stays as it is.
+            if (Mathf.Approximately(PhaseHealth.Value, 4000f))
+            {
+                PhaseHealth.Value = 10000f;
+                Log.LogInfo("[Boss] PhaseHealth was the old default 4000; now 10000");
+            }
             PhaseHealthPerBoss = Admin("Boss", "PhaseHealthPerBoss", 0f, "Extra health per phase for every boss defeated in the world (0 = always endgame).");
+            PartyHealth = Admin("Boss", "PartyHealth", 0.5f,
+                "Extra phase health for every other player within 60 m of him when a phase starts (0.5 = +50% each), so a group fight lasts as a solo one does.");
             BossDamageAtStart = Admin("Boss", "DamageAtStart", 0.6f,
                 "His weapons hit like endgame weapons; as a boss he deals this share of that in a world with no boss defeated.");
             BossDamagePerBoss = Admin("Boss", "DamagePerBoss", 0f, "Added to that share for every boss defeated (0 = always endgame).");

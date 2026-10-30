@@ -115,8 +115,14 @@ namespace Alfrik
             {
                 shared.m_secondaryAttack = slam;
                 shared.m_attack = swing;
+                // A demigod's blow follows a moving target: he keeps turning through the swing (a player's battle axe turns
+                // at a fifth of the speed), and it reaches a little further and sweeps wider.
+                swing.m_speedFactorRotation = Mathf.Max(swing.m_speedFactorRotation, 1f);
+                swing.m_attackRange = Mathf.Max(swing.m_attackRange, 3f);
+                swing.m_attackAngle = Mathf.Max(swing.m_attackAngle, 180f);
                 Plugin.Log.LogInfo("Fjallbrjotr swing: " + swing.m_attackAnimation + " from " + swingFrom + " (" + swing.m_attackType +
-                    ", reach " + swing.m_attackRange.ToString("0.0") + " m); the slam (" + slam.m_attackAnimation + ") is his heavy blow");
+                    ", reach " + swing.m_attackRange.ToString("0.0") + " m, arc " + swing.m_attackAngle.ToString("0") + " deg, turning " +
+                    swing.m_speedFactorRotation.ToString("0.0") + "); the slam (" + slam.m_attackAnimation + ") is his heavy blow");
             }
             else
                 Plugin.Log.LogWarning("Fjallbrjotr: no battle axe to borrow a swing from; the slam stays his only attack");

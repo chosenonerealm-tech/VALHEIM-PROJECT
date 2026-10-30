@@ -26,10 +26,14 @@ namespace Alfrik
     //                     drawn up, then the foot comes down and the ground heaves outward in rings to 4.5 m. cd 18 s.
     //  Grave Ring       - a slam, then rings burst outward from him, 2 m further each step out to 8 m (Quake). cd 22 s.
     //  Every wave along the ground (the rings, the rupture) catches only those on the ground as it reaches them.
-    //  Odin's Wrath     - at range his main move: three lightning bolts, on the target, a second enemy, the target. cd 6 s.
+    //  Odin's Wrath     - at range his main move: three lightning bolts, on the target, a second enemy, the target, each
+    //                     called down where the target is heading. cd 6 s.
     //  Odin's Charge    - once the storm has worn the target down (stamina under 30% after a barrage, or three barrages):
-    //                     a burst run at it, then up to three slashes, each only with it in reach.
-    //  War Horn         - a roar that slows everyone around for 4 s and drives him on, faster for 6 s. cd 28 s.
+    //                     a burst run at it, a strike whose blow sends a ring out from him, then up to two slashes.
+    //  War Horn         - a roar that slows everyone around for 4 s and drives him on, faster for 6 s, and opens a combo
+    //                     at once: Horn of the Hunt (Odin's Charge) or Storm Call (Odin's Wrath); up close the Reaping
+    //                     Sweep. cd 28 s.
+    //  His ordinary swing turns with the target all through it, reaches 3 m and sweeps 180 degrees.
     //  He swings only at a target in reach: FURY and Reaping Sweep close in first, an Executioner or a bash out of
     //  reach is not made.
     //  Executioner      - the axe raised high, a pause, a red flash, then an overhead chop that cannot be blocked. cd 18 s.
@@ -271,6 +275,14 @@ namespace Alfrik
                     return false;
                 pick = _ready[UnityEngine.Random.Range(0, _ready.Count)];
             }
+            StartMove(c, pick, dist, spot);
+            return true;
+        }
+
+        // Starts one of his moves (its warning first): chosen by Choose2, or as the next link of a combo (War Horn).
+        private static void StartMove(Humanoid c, Act pick, float dist, Vector3 spot)
+        {
+            float now = Time.time;
             switch (pick)
             {
                 case Act.FuryTell:
@@ -345,13 +357,55 @@ namespace Alfrik
             // his ordinary swings, so they do not run into each other (EndAct holds the next one back once this one ends).
             _nextAbility = now + UnityEngine.Random.Range(1.5f, 2.5f);
             _moves++;
-            return true;
         }
 
         // Odin's Charge comes once the storm has worn the target down: its stamina under 30% after at least one barrage
         // (readable only for the player whose game runs him), or three barrages of Odin's Wrath since his last charge.
         private static int _barrages;
         private static string _drainedWhy;
+        // When Odin's Charge's impact ring goes out at the latest (it goes with the strike's blow).
+        private static float _rushRingAt;
+
+        // Where his target is heading (its flat velocity, smoothed), so Odin's Wrath is called down ahead of it.
+        private static Character _velOf;
+        private static Vector3 _velFrom, _targetVel;
+        private static string _wrathAims = "";
+
+        private static void TrackTarget()
+        {
+            if (_target == null || Time.deltaTime <= 0f)
+            {
+                _velOf = null;
+                _targetVel = Vector3.zero;
+                return;
+            }
+            Vector3 at = _target.transform.position;
+            if (_velOf != _target)
+            {
+                _velOf = _target;
+                _velFrom = at;
+                _targetVel = Vector3.zero;
+                return;
+            }
+            Vector3 step = Flat(at - _velFrom) / Time.deltaTime;
+            _velFrom = at;
+            // A jump in its synced position is not running.
+            if (step.magnitude > 20f)
+                return;
+            _targetVel = Vector3.Lerp(_targetVel, step, Mathf.Clamp01(Time.deltaTime * 6f));
+        }
+
+        // Where a bolt on his target is called: where it will be when the bolt falls (0.9 s on), by a random 50-100% of
+        // that, at most 8 m ahead. Another mark is struck where it stands.
+        private static Vector3 LeadOf(Character mark, out float lead)
+        {
+            lead = 0f;
+            if (mark != _target)
+                return mark.transform.position;
+            Vector3 ahead = Vector3.ClampMagnitude(_targetVel * 0.9f * UnityEngine.Random.Range(0.5f, 1f), 8f);
+            lead = ahead.magnitude;
+            return mark.transform.position + ahead;
+        }
 
         private static bool Drained(out string why)
         {
@@ -757,21 +811,27 @@ namespace Alfrik
                     }
                     break;
                 case Act.Wrath:
-                    // Three bolts, 0.6 s apart, each called down where its mark is when it is called: the target, the
-                    // second enemy near him if there is one, the target again.
+                    // Three bolts, 0.6 s apart: the target, the second enemy near him if there is one, the target again.
+                    // Each is called down where its mark is heading, not where it stands (LeadOf).
                     Drive(c, Vector3.zero, toTarget, false);
                     if (_strikes < 3 && now >= _strikeAt)
                     {
+                        if (_strikes == 0)
+                            _wrathAims = "";
                         Character second = _strikes == 1 ? SecondEnemy(c) : null;
                         Character mark = second != null ? second : _target;
                         if (mark != null && !mark.IsDead())
-                            Strikes.Send(c, mark.transform.position, Strikes.Lightning);
+                        {
+                            Strikes.Send(c, LeadOf(mark, out float lead), Strikes.Lightning);
+                            _wrathAims += (_wrathAims.Length > 0 ? " / " : "") + lead.ToString("0.0");
+                        }
                         _strikes++;
                         _strikeAt = now + 0.6f;
                     }
                     if (_strikes >= 3 && now >= _strikeAt)
                     {
                         _barrages++;
+                        Plugin.Log.LogInfo("Alfrik's Odin's Wrath bolts aimed " + _wrathAims + " m ahead");
                         EndAct(c);
                     }
                     break;
@@ -796,7 +856,16 @@ namespace Alfrik
                 case Act.Horn:
                     Drive(c, Vector3.zero, toTarget, false);
                     if (now >= _actEnd)
-                        EndAct(c);
+                    {
+                        // The horn opens a combo at once: the slowed target is run down (Horn of the Hunt) or the storm is
+                        // called down on it (Storm Call); up close, the Reaping Sweep.
+                        Trigger("emote_stop");
+                        Act next = dist >= 5f ? (UnityEngine.Random.value < 0.5f ? Act.RushTell : Act.WrathTell) : Act.SweepTell;
+                        Plugin.Log.LogInfo("Alfrik's War Horn calls " + (next == Act.RushTell ? "Horn of the Hunt (Odin's Charge)"
+                            : next == Act.WrathTell ? "Storm Call (Odin's Wrath)" : "the Reaping Sweep"));
+                        _drainedWhy = "War Horn";
+                        StartMove(c, next, dist, Vector3.zero);
+                    }
                     break;
                 case Act.Advance:
                     // Iron Advance: walking in behind the raised Iron Wall (WallHit takes the blows on it), then the bash.
@@ -851,12 +920,18 @@ namespace Alfrik
                     }
                     break;
                 case Act.Rush:
-                    // Odin's Charge: a burst run at the target (turning at most 120 degrees a second, so it is a charge),
-                    // then up to three slashes, each only with the target in reach.
+                    // Odin's Charge: a burst run at the target (turning at most 120 degrees a second, so it is a charge); on
+                    // reaching it a strike, whose blow sends a ring out from him (Quake), then up to two slashes, each only
+                    // with the target in reach.
                     if (_target == null)
                     {
                         EndAct(c);
                         break;
+                    }
+                    if (_rushRingAt > 0f && (Struck(_swingAt) || now >= _rushRingAt))
+                    {
+                        _rushRingAt = 0f;
+                        Quake.Send(c, c.transform.position + c.transform.forward * 0.8f, Quake.ChargeImpact);
                     }
                     if (dist > Reach && _swings == 0)
                     {
@@ -866,14 +941,25 @@ namespace Alfrik
                     else
                     {
                         Drive(c, dist > Reach && !c.InAttack() ? toTarget : Vector3.zero, toTarget, false);
-                        if (InReach(dist) && !c.InAttack() && Time.time >= _recoverUntil && _swings < 3 &&
-                            Swing(c, false, "Odin's Charge slash " + (_swings + 1)))
-                            _swings++;
+                        if (InReach(dist) && !c.InAttack() && Time.time >= _recoverUntil && _swings < 3)
+                        {
+                            bool strike = _swings == 0;
+                            if (Swing(c, false, strike ? "Odin's Charge strike" : "Odin's Charge slash " + _swings))
+                            {
+                                _swings++;
+                                if (strike)
+                                {
+                                    _swingAt = now;
+                                    _rushRingAt = now + 0.9f;
+                                }
+                            }
+                        }
                     }
-                    if ((_swings >= 3 && !c.InAttack()) || now >= _actEnd)
+                    if ((_swings >= 3 && !c.InAttack() && _rushRingAt <= 0f) || now >= _actEnd)
                     {
                         if (_swings == 0)
                             Plugin.Log.LogInfo("Alfrik's Odin's Charge ends out of reach (" + dist.ToString("0.0") + " m)");
+                        _rushRingAt = 0f;
                         EndAct(c);
                     }
                     break;

@@ -169,7 +169,7 @@ namespace Alfrik
     // only the game that owns him deals the damage, once to each enemy per move (it cannot be blocked).
     internal static class Quake
     {
-        internal const int GraveRing = 0, Stomp = 1, FallLanding = 2;
+        internal const int GraveRing = 0, Stomp = 1, FallLanding = 2, ChargeImpact = 3;
         private const string Rpc = "Alfrik_Quake";
 
         internal sealed class Kind
@@ -186,6 +186,7 @@ namespace Alfrik
             new Kind { Name = "Grave Ring", First = 2f, Step = 2f, Steps = 4, Interval = 0.3f, Band = 1.1f, Share = 0.9f, Push = 60f, Stagger = 2f },
             new Kind { Name = "War Stomp", First = 1.5f, Step = 1.5f, Steps = 3, Interval = 0.2f, Band = 0.85f, Share = 0.6f, Push = 110f, Stagger = 2.5f },
             new Kind { Name = "Odin's Fall landing", First = 1.5f, Step = 1.5f, Steps = 4, Interval = 0.2f, Band = 0.85f, Share = 1.1f, Push = 90f, Stagger = 2f },
+            new Kind { Name = "Odin's Charge impact", First = 1.5f, Step = 1.5f, Steps = 3, Interval = 0.15f, Band = 0.85f, Share = 0.8f, Push = 120f, Stagger = 3f },
         };
 
         internal static void Register() => ZRoutedRpc.instance?.Register<ZDOID, Vector3, int>(Rpc, OnQuake);

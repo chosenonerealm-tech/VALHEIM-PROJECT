@@ -229,6 +229,7 @@ namespace Alfrik
             _ai = c.GetBaseAI() as MonsterAI;
             _target = _ai == null ? null : _ai.GetTargetCreature();
             KeepAggro(c);
+            TrackTarget();
             float dist = _target == null ? float.MaxValue : Flat(_target.transform.position - c.transform.position).magnitude;
 
             if (Time.time < _rollUntil)

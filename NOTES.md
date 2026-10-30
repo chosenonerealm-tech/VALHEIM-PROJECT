@@ -85,9 +85,25 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.12)
+## Current state (0.9.13)
 
-0.9.12 (cloud, not built here; branch `cloud/phase2-fixes`, on top of 0.9.11, which is not yet played either):
+The roadmap the owner agreed to is in `PLAN.md`.
+
+0.9.13 (cloud, not built here; branch `cloud/demigod`, on top of 0.9.12 and its test log):
+- Health: [Boss] PhaseHealth default 10000 (an old 4000 is moved up; a hand-set value stays); new [Boss] PartyHealth,
+  +50% per extra player within 60 m, counted when a phase starts (ZDO `sc_alfrik_party`).
+- His swing turns with the target through the whole swing, reaches 3 m and sweeps 180 degrees.
+- Odin's Charge: on reaching the target a strike whose blow sends a jumpable ring out (Quake "Odin's Charge impact"),
+  then up to two slashes.
+- Odin's Wrath: bolts called down where the target is heading (50-100% of its 0.9 s run, at most 8 m); the bolt is
+  drawn as a column of glow particles with a ring of light and sparks where it strikes (the line alone did not show).
+- War Horn opens a combo at once: Horn of the Hunt (Odin's Charge) or Storm Call (Odin's Wrath); up close Reaping Sweep.
+- New log lines: "[Boss] PhaseHealth was the old default 4000; now 10000", "Alfrik: phase N, …, 10000 health (1
+  player(s))", "Fjallbrjotr swing: … reach 3.0 m, arc 180 deg, turning 1.0", "Alfrik's Odin's Charge strike lands on
+  N", "Alfrik's Odin's Charge impact catches N (M jumped it)", "Alfrik's Odin's Wrath bolts aimed A / B / C m ahead",
+  "Alfrik's War Horn calls Horn of the Hunt (Odin's Charge) | Storm Call (Odin's Wrath) | the Reaping Sweep".
+
+0.9.12, played (`logs/2026-10-31_0222.log`):
 - Jumpable ground waves: Grave Ring, War Stomp and Odin's Fall's landing burst outward in stepped rings (`Quake` in
   `GroundWave.cs`, RPC `Alfrik_Quake`); Earthsplitter stays a line. A wave catches only those on the ground as it
   reaches them (`GroundWave.Airborne`: own character `IsOnGround`, others by synced height).

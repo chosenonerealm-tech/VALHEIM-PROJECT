@@ -373,11 +373,15 @@ namespace Alfrik
             Sounds.PlayAt("thunder", at, 1f, 120f);
             Bolt(at);
             Burst(at + Vector3.up * 0.3f, null, "p1_spark", Storm, 30, 4f, 11f, 0.3f, 0.25f, 0.3f, 1f);
+            // Where it struck: a ring of light swelling on the ground and sparks crackling up off it while the bolt fades.
+            Ring(at + Vector3.up * 0.05f, "p1_firering", new Color(0.7f, 0.85f, 1f, 1f), 0f, 1, 0f, BoltFade.Seconds, 1f, Strikes.BoltRadius * 2.2f);
+            Burst(at + Vector3.up * 0.2f, null, "p1_spark", Storm, 24, 0.4f, 1.6f, 0.2f, BoltFade.Seconds, Strikes.BoltRadius * 0.6f, -0.3f);
             Flash(at + Vector3.up * 2f, null, Storm, 16f, 10f, BoltFade.Seconds);
             GameCamera.instance?.AddShake(at, 25f, 1f, false);
         }
 
-        // A jagged bolt from high above down to the ground, fading out over BoltFade.Seconds.
+        // A jagged bolt from high above down to the ground (a line and a column of glow, BoltGlow), fading out over
+        // BoltFade.Seconds.
         private static void Bolt(Vector3 ground)
         {
             var bolt = new GameObject("Alfrik_Bolt");
@@ -399,6 +403,44 @@ namespace Alfrik
             line.startColor = new Color(0.85f, 0.9f, 1f, 1f);
             line.endColor = Color.white;
             bolt.AddComponent<BoltFade>();
+            var path = new Vector3[points];
+            line.GetPositions(path);
+            BoltGlow(path);
+        }
+
+        // The bolt as light (the line alone did not show in game): glowing sprites all down its jagged path, white-blue,
+        // fading out over BoltFade.Seconds.
+        private static void BoltGlow(Vector3[] path)
+        {
+            var host = new GameObject("Alfrik_BoltGlow");
+            host.transform.position = path[path.Length - 1];
+            ParticleSystem system = Aura.Particles(host, Color.white, 1f, BoltFade.Seconds, 200, true, Textures.Get("p1_flare"));
+            ParticleSystem.MainModule main = system.main;
+            main.loop = false;
+            main.duration = BoltFade.Seconds;
+            main.stopAction = ParticleSystemStopAction.Destroy;
+            ParticleSystem.EmissionModule emission = system.emission;
+            emission.rateOverTime = 0f;
+            ParticleSystem.ColorOverLifetimeModule fade = system.colorOverLifetime;
+            fade.enabled = true;
+            var gradient = new Gradient();
+            gradient.SetKeys(
+                new[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(new Color(0.6f, 0.75f, 1f), 1f) },
+                new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0.8f, 0.2f), new GradientAlphaKey(0f, 1f) });
+            fade.color = gradient;
+            system.Play();
+            var emit = new ParticleSystem.EmitParams { startLifetime = BoltFade.Seconds, applyShapeToPosition = false };
+            for (int i = 1; i < path.Length; i++)
+            {
+                int steps = Mathf.Max(1, Mathf.CeilToInt(Vector3.Distance(path[i - 1], path[i]) / 0.45f));
+                for (int k = 0; k < steps; k++)
+                {
+                    emit.position = Vector3.Lerp(path[i - 1], path[i], (k + Random.value) / steps);
+                    emit.startSize = Random.Range(0.7f, 1.3f);
+                    emit.startColor = Color.Lerp(new Color(0.75f, 0.85f, 1f, 1f), Color.white, Random.value);
+                    system.Emit(emit, 1);
+                }
+            }
         }
 
         // A thrown axe biting into the ground.

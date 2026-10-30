@@ -62,6 +62,7 @@ namespace Alfrik
         private static readonly int TraitsKey = "vnpc_traits".GetStableHashCode();
         private static readonly int LevelKey = "vnpc_level".GetStableHashCode();
         private static readonly int LevelledKey = "sc_alfrik_levelled".GetStableHashCode();
+        private static readonly int PartyKey = "sc_alfrik_party".GetStableHashCode();
         private const int JoinAtLevel = 10;
 
         // Owner: a defeated boss is no green recruit - he joins at level 10 (Vikings for Hire's own level, which sets his
@@ -162,7 +163,22 @@ namespace Alfrik
         }
 
         internal static int Bosses() => _bossesDefeated == null ? 0 : (int)_bossesDefeated.Invoke(null, null);
-        private static float PhaseMaxHealth() => Plugin.PhaseHealth.Value + Plugin.PhaseHealthPerBoss.Value * Bosses();
+        // A phase's health: [Boss] PhaseHealth (and PerBoss), and [Boss] PartyHealth more for every other player who was
+        // within 60 m when the phase began (counted then and kept in his ZDO, so it holds through the phase).
+        private static float PhaseMaxHealth() =>
+            (Plugin.PhaseHealth.Value + Plugin.PhaseHealthPerBoss.Value * Bosses()) * (1f + Plugin.PartyHealth.Value * (Party() - 1));
+
+        private static int Party() => _view != null && _view.IsValid() ? Mathf.Max(1, _view.GetZDO().GetInt(PartyKey, 1)) : 1;
+
+        // Owner, as a phase begins: the players within 60 m of him (at least one).
+        private static void CountParty(ZDO zdo)
+        {
+            int count = 0;
+            foreach (Player player in Player.GetAllPlayers())
+                if (player != null && !player.IsDead() && Vector3.Distance(player.transform.position, _char.transform.position) <= 60f)
+                    count++;
+            zdo.Set(PartyKey, Mathf.Max(1, count));
+        }
         // As a companion his levels count the way Vikings for Hire counts them for any viking ([3] HealthPerLevel).
         private static float CompanionMaxHealth() =>
             (Plugin.CompanionHealth.Value + Plugin.CompanionHealthPerBoss.Value * Bosses()) *
@@ -201,11 +217,12 @@ namespace Alfrik
             _configureBandit?.Invoke(null, new object[] { npc.gameObject, Mathf.Clamp(bosses, 0, 7), Mathf.Clamp(3 + bosses, 3, 10) });
             zdo.Set(BornKey, ZNet.instance.GetTime().Ticks);
             _surrenderRolled?.SetValue(npc, true);
+            CountParty(zdo);
             _updateMaxHealth?.Invoke(npc, null);
             _char.SetHealth(_char.GetMaxHealth());
             _gearSignature?.SetValue(npc, null);
             Brain.NewPhase();
-            Plugin.Log.LogInfo("Alfrik: summoned, phase 1, " + _char.GetMaxHealth().ToString("0") + " health");
+            Plugin.Log.LogInfo("Alfrik: summoned, phase 1, " + _char.GetMaxHealth().ToString("0") + " health (" + Party() + " player(s))");
             return _name + ", " + Title + ", comes down from the sky: " + Phases.Length + " phase(s) of " +
                 _char.GetMaxHealth().ToString("0") + " health. Beat him and he is yours.";
         }
@@ -607,9 +624,11 @@ namespace Alfrik
             zdo.Set(PhaseKey, _phase);
             Fx.Send(Fx.Swap);
             Brain.NewPhase();
+            CountParty(zdo);
             _updateMaxHealth?.Invoke(_npc, null);
             _char.SetHealth(_char.GetMaxHealth());
-            Plugin.Log.LogInfo("Alfrik: phase " + _phase + ", " + CurrentPhase?.Name + ", " + _char.GetMaxHealth().ToString("0") + " health");
+            Plugin.Log.LogInfo("Alfrik: phase " + _phase + ", " + CurrentPhase?.Name + ", " + _char.GetMaxHealth().ToString("0") + " health (" +
+                Party() + " player(s))");
             // The new phase's weapon straight into his hands (Gear: the old one out, the new one in and equipped),
             // instead of a whole gear rebuild that re-equipped him over and over.
             Gear(_npc);
