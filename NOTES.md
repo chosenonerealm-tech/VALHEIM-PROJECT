@@ -98,9 +98,11 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.13)
+## Current state (0.9.14)
 
 The roadmap the owner agreed to is in `PLAN.md`.
+
+0.9.14: the same code as 0.9.13 (not yet played), pushed with the owner's branch rules in this file.
 
 0.9.13 (cloud, not built here; branch `cloud/demigod`, on top of 0.9.12 and its test log):
 - Health: [Boss] PhaseHealth default 10000 (an old 4000 is moved up; a hand-set value stays); new [Boss] PartyHealth,
