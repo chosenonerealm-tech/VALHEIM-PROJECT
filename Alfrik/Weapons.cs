@@ -106,6 +106,20 @@ namespace Alfrik
             damage.m_slash = damage.m_pierce = 0f;
             shared.m_damages = damage;
             shared.m_attackForce = Mathf.Max(shared.m_attackForce, 160f);
+            // A sledge has only its ground slam. His normal swing is a battle axe's wide two-handed swing (its animation and
+            // reach, none of its sounds: his own whoosh plays, Fx Swing2); the slam becomes his heavy blow, kept for his
+            // big moves (Brain asks for it).
+            Attack slam = shared.m_attack;
+            Attack swing = BorrowedSwing(out string swingFrom);
+            if (swing != null && slam != null)
+            {
+                shared.m_secondaryAttack = slam;
+                shared.m_attack = swing;
+                Plugin.Log.LogInfo("Fjallbrjotr swing: " + swing.m_attackAnimation + " from " + swingFrom + " (" + swing.m_attackType +
+                    ", reach " + swing.m_attackRange.ToString("0.0") + " m); the slam (" + slam.m_attackAnimation + ") is his heavy blow");
+            }
+            else
+                Plugin.Log.LogWarning("Fjallbrjotr: no battle axe to borrow a swing from; the slam stays his only attack");
             foreach (Attack attack in new[] { shared.m_attack, shared.m_secondaryAttack })
                 if (attack != null)
                 {
@@ -117,12 +131,18 @@ namespace Alfrik
                     ? shared.m_secondaryAttack.m_attackAnimation : "none"));
             // The sledge's own ground slam stays: its area blow (made half again as wide for him) with the game's own
             // shockwave, dust and sound where it lands (its trigger effects), on top of his own (Fx Swing2, Hit2).
-            Attack slam = shared.m_attack;
             if (slam != null)
             {
                 float width = slam.m_attackRayWidth;
                 if (slam.m_attackType == Attack.AttackType.Area)
                     slam.m_attackRayWidth *= 1.5f;
+                // The item's trigger effects play with every attack it makes: moved onto the slam, so the shockwave and
+                // dust come only with the slam, not with every swing.
+                if (shared.m_attack != slam && (slam.m_triggerEffect?.m_effectPrefabs?.Length ?? 0) == 0 && shared.m_triggerEffect != null)
+                {
+                    slam.m_triggerEffect = shared.m_triggerEffect;
+                    shared.m_triggerEffect = new EffectList { m_effectPrefabs = new EffectList.EffectData[0] };
+                }
                 Plugin.Log.LogInfo("Fjallbrjotr slam: " + slam.m_attackType + ", reach " + slam.m_attackRange.ToString("0.0") + " m, radius " +
                     width.ToString("0.0") + " -> " + slam.m_attackRayWidth.ToString("0.0") + " m, effects " +
                     (slam.m_triggerEffect?.m_effectPrefabs?.Length ?? 0) + " + " + (shared.m_triggerEffect?.m_effectPrefabs?.Length ?? 0));
@@ -144,6 +164,31 @@ namespace Alfrik
                     }
             }
             ItemManager.Instance.AddItem(item);
+        }
+
+        private static readonly string[] SwingBases = { "Battleaxe", "BattleaxeCrystal" };
+        private static readonly System.Reflection.MethodInfo ShallowCopy =
+            typeof(object).GetMethod("MemberwiseClone", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+        // A copy of a vanilla battle axe's normal swing. The copy shares the battle axe's effect lists, so it is given empty
+        // ones of its own (emptying the shared ones would silence the players' battle axes).
+        private static Attack BorrowedSwing(out string from)
+        {
+            foreach (string name in SwingBases)
+            {
+                Attack attack = PrefabManager.Instance.GetPrefab(name)?.GetComponent<ItemDrop>()?.m_itemData?.m_shared?.m_attack;
+                if (attack == null || string.IsNullOrEmpty(attack.m_attackAnimation))
+                    continue;
+                var copy = (Attack)ShallowCopy.Invoke(attack, null);
+                foreach (System.Reflection.FieldInfo field in typeof(Attack).GetFields(System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic))
+                    if (field.FieldType == typeof(EffectList))
+                        field.SetValue(copy, new EffectList { m_effectPrefabs = new EffectList.EffectData[0] });
+                from = name;
+                return copy;
+            }
+            from = null;
+            return null;
         }
 
         // Empties every effect list (sounds and particles) on an item's data or one of its attacks.

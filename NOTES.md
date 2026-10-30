@@ -85,9 +85,24 @@ Watch these when touching related code:
 - Vikings for Hire is reached by reflection (`ValheimNpc.VikingNpc`), ZDO keys `vnpc_*`; Alfrik's own keys `sc_alfrik*`.
 - Warning poses are additive muscle pushes (`Poses.cs`), eased in/out.
 
-## Current state (0.9.10)
+## Current state (0.9.11)
 
-0.9.10 (cloud, not built here): the unused phase-2 Bleed (`Bleed.cs`, [Boss] BleedPerSecond/BleedSeconds) and Bearded
+0.9.11 (cloud, not built here; branch `cloud/phase2-fixes`, on top of 0.9.10):
+- Fjallbrjótr: a battle axe's swing (borrowed from vanilla `Battleaxe`, its sounds left out) is his normal attack; the
+  sledge slam is his heavy blow, used only in big moves (Executioner, Earthsplitter, Grave Ring, FURY's last blow,
+  counters). The sledge's shockwave effect now plays with the slam only.
+- Blows synced to the swing's hit frame (`Humanoid.OnAttackTrigger`): phase-2 Shoulder bash, Earthsplitter rupture,
+  Grave Ring; none of them fires if the swing never started.
+- Max health kept at [Boss] PhaseHealth (the last logs showed a bar of ~66); phase start logs his health.
+- Retribution is a stance (no new moves while it lasts; out-of-reach strikers kept); its end is logged.
+- Odin's Fall keeps his body kinematic and unsmoothed in the air, even if Vikings for Hire lets go of it.
+- Phase-2 pacing: the next move waits 2.5-4 s after the last one ends.
+- New log lines: "Fjallbrjotr swing: …", "Alfrik's pace, 15 s: …", "Alfrik's <move> lands on N",
+  "Alfrik's Earthsplitter catches N", "… rupture goes out / Grave Ring is marked (with the blow | by time)",
+  "Alfrik's Shoulder Breaker hits N", "Alfrik's Retribution ends: …", "Alfrik's max health was …",
+  "Alfrik's leap: his body was let go mid-air …", "Skeggold hold: … in a swing|slam".
+
+0.9.10, played (`logs/2026-10-31_0112.log`): the unused phase-2 Bleed (`Bleed.cs`, [Boss] BleedPerSecond/BleedSeconds) and Bearded
 Hook (`HookPull.cs`, `HookChain.cs`, its pose and effect) removed; the stun on every blow that hurts replaces the
 bleed. Their files in the plugin folder (`Audio/p2bleed*`, `Audio/p2chain*`, the `p2_blood` texture) are now unused.
 

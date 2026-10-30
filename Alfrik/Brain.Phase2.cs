@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Alfrik
 {
-    // Phase 2, The Unbroken: Skeggöld in both hands. A wall that answers: he does not roll, he blocks, parries and
-    // counterattacks, and his blows cover ground (every swing of Skeggöld is 180 degrees wide).
+    // Phase 2, The Unbroken: Fjallbrjótr in both hands - a battle axe's wide two-handed swings for his ordinary blows, the
+    // sledge's ground slam for his big moves (Executioner, Earthsplitter, Grave Ring, FURY's last blow, his counters).
+    // A wall that answers: he does not roll, he blocks, parries and counterattacks.
     //  Iron Wall        - against a swing or a shot coming at him, often after a burst: the great axe raised as a guard
     //                     (the game's block) for 2.4 s. Hits from the front are blocked; a blunt or heavy (secondary)
     //                     hit breaks it (he is never staggered in this phase); the third hit blocked is answered at once
@@ -35,6 +36,62 @@ namespace Alfrik
         // His damage on the swing under way (FURY's chops grow); read by AlfrikBoss.DamageDealt.
         internal static float SwingBoost = 1f;
 
+        // The ground slam (Fjallbrjótr's heavy blow) is under way, not his normal swing; for HeldAxes' hold report.
+        internal static bool SlamUnderWay => AlfrikBoss.Char != null && AlfrikBoss.Char.InAttack() && SecondaryOf(AlfrikBoss.Char);
+
+        // ---- Hit frames and results ----
+
+        // The moment his blow under way strikes (the animation's hit frame, Humanoid.OnAttackTrigger), so what goes with a
+        // blow (the bash, the rupture, the ring) comes with it, never before it.
+        private static float _lastImpact = -1f, _swingAt;
+        private static int _impacts, _swingsStarted, _slams, _moves;
+
+        private static void Impact(Character __instance)
+        {
+            if (__instance == null || __instance != AlfrikBoss.Char)
+                return;
+            _lastImpact = Time.time;
+            _impacts++;
+        }
+
+        // His blow begun at that time has struck.
+        private static bool Struck(float since) => _lastImpact >= since;
+
+        // A blow of one of his moves: whom it caught is logged when the swing ends ("Alfrik's <move> lands on N").
+        private static string _swingLabel;
+        private static int _labelHits;
+
+        private static bool Swing(Humanoid c, bool secondary, string label)
+        {
+            if (!Swing(c, secondary))
+                return false;
+            EndLabel();
+            _swingLabel = label;
+            _labelHits = 0;
+            return true;
+        }
+
+        private static void EndLabel()
+        {
+            if (_swingLabel == null)
+                return;
+            Plugin.Log.LogInfo("Alfrik's " + _swingLabel + " lands on " + _labelHits);
+            _swingLabel = null;
+        }
+
+        // Character.Damage prefix, on the game that owns him: whom his labelled blow catches (his weapon's own hits, not
+        // the blasts, strikes and ruptures of his moves, which log themselves). The hit is taken by position (__0).
+        private static void Dealt(Character __instance, HitData __0)
+        {
+            Humanoid c = AlfrikBoss.Char;
+            HitData hit = __0;
+            if (_swingLabel == null || hit == null || c == null || __instance == null || __instance == c)
+                return;
+            ItemDrop.ItemData weapon = c.GetCurrentWeapon();
+            if (weapon != null && hit.m_skill == weapon.m_shared.m_skillType && hit.GetAttacker() == c)
+                _labelHits++;
+        }
+
         private static float _heavyUntil, _nextWall, _nextParry2, _nextSweep, _nextExec, _nextFury, _waveAt;
         private static int _wallBlocks;
         private static float _nextFall, _nextSplit, _nextStomp, _splitAt, _behindSince = -1f;
@@ -44,7 +101,8 @@ namespace Alfrik
         private const float FallRadius = 5f, StompRadius = 4f, HornRadius = 15f;
         private static float _nextRetrib, _retribUntil, _nextRetaliate, _nextRing, _nextWrath, _nextHorn, _nextAdvance,
             _nextExecStomp, _strikeAt;
-        private static int _strikes;
+        private static int _strikes, _retribHits, _retribAnswers;
+        private static bool _leapLetGo;
         private static Character _retaliate;
         private static readonly List<Act> _ready = new List<Act>();
 
@@ -159,6 +217,9 @@ namespace Alfrik
         private static bool Choose2(Humanoid c, float dist)
         {
             float now = Time.time;
+            // Retribution is a stance: while it lasts he starts nothing new, so he is free to answer every blow.
+            if (Retribution)
+                return false;
             // FURY first when it is ready; otherwise one of the abilities ready and in range, at random, so they do not
             // always come in the same order.
             Act pick = Act.None;
@@ -254,8 +315,9 @@ namespace Alfrik
                     break;
             }
             // No snap: during the warning he turns to the target the usual way. Between his abilities there is room for
-            // his ordinary swings, so they do not run into each other.
+            // his ordinary swings, so they do not run into each other (EndAct holds the next one back once this one ends).
             _nextAbility = now + UnityEngine.Random.Range(1.5f, 2.5f);
+            _moves++;
             return true;
         }
 
@@ -273,16 +335,28 @@ namespace Alfrik
             if (attacking || Time.time < _nextRetaliate)
                 return false;
             Character foe = _retaliate;
-            _retaliate = null;
-            if (Flat(foe.transform.position - c.transform.position).magnitude > 4.5f)
+            // Out of his reach (often thrown back by his own blow): kept until Retribution ends, answered once in reach.
+            if (Flat(foe.transform.position - c.transform.position).magnitude > Reach + 1f)
                 return false;
             _target = foe;
-            if (!Swing(c, false))
+            if (!Swing(c, false, "Retribution answer"))
                 return false;
+            _retaliate = null;
+            _retribAnswers++;
             _nextRetaliate = Time.time + 0.6f;
             Fx.SendAt(Fx.Block, c.GetCenterPoint() + c.transform.forward * 0.6f);
             Plugin.Log.LogInfo("Alfrik's Retribution answers " + foe.GetHoverName());
             return true;
+        }
+
+        // Retribution is over: how it went.
+        private static void RetribEnd()
+        {
+            if (_retribUntil <= 0f || Time.time < _retribUntil)
+                return;
+            _retribUntil = 0f;
+            _retaliate = null;
+            Plugin.Log.LogInfo("Alfrik's Retribution ends: " + _retribHits + " melee blow(s) taken close by, " + _retribAnswers + " answered");
         }
 
         // War Stomp, checked every frame he is free: someone at his side or back within 4 m, or two enemies that close,
@@ -311,6 +385,7 @@ namespace Alfrik
                 return;
             _behindSince = -1f;
             _nextStomp = now + 18f;
+            _moves++;
             Start(Act.StompTell, Tell(0.45f));
             Sounds.PlayAt("p2growl", c.GetCenterPoint(), 0.7f);
             Plugin.Log.LogInfo("Alfrik: War Stomp (" + near.Count + " near" + (flanked ? ", one at his side or back)" : ")"));
@@ -403,11 +478,30 @@ namespace Alfrik
             }
             Face(c, _target);
             Fx.Send(Fx.Leap);
+            _leapLetGo = false;
+        }
+
+        // In the air his body stays kinematic and unsmoothed. Something that lets go of it mid-air (Vikings for Hire's
+        // check for a frozen body) is undone at once, logged once a leap.
+        private static void HoldInAir(Humanoid c)
+        {
+            Rigidbody body = c.GetComponent<Rigidbody>();
+            if (body == null || (body.isKinematic && body.interpolation == RigidbodyInterpolation.None))
+                return;
+            if (!_leapLetGo)
+            {
+                _leapLetGo = true;
+                Plugin.Log.LogInfo("Alfrik's leap: his body was let go mid-air (kinematic " + body.isKinematic + ", smoothing " +
+                    body.interpolation + "); held again");
+            }
+            body.interpolation = RigidbodyInterpolation.None;
+            body.isKinematic = true;
         }
 
         private static void Leap(Humanoid c, float now)
         {
             c.SetMoveDir(Vector3.zero);
+            HoldInAir(c);
             float t = Mathf.Clamp01((now - _actStart) / Mathf.Max(_actEnd - _actStart, 0.01f));
             Place(c, ArcPoint(_leapFrom, _leapTo, t));
             if (t < 1f)
@@ -476,7 +570,7 @@ namespace Alfrik
                     if (!c.InAttack() && Time.time >= _recoverUntil && _swings < 2 && _target != null)
                     {
                         SwingBoost = _swings == 0 ? 1f : 1.2f;
-                        if (Swing(c, false))
+                        if (Swing(c, false, "Reaping Sweep " + (_swings + 1)))
                         {
                             Fx.Send(Fx.Sweep);
                             _swings++;
@@ -513,15 +607,19 @@ namespace Alfrik
                     if (now >= _actEnd)
                     {
                         _heavyUntil = now + 0.3f;
-                        Swing(c, true);
+                        bool swung = Swing(c, true);
                         Start(Act.Split, 2.5f);
-                        _splitAt = now + 0.45f;
+                        // The rupture goes out as the hammer strikes the ground (its hit frame); no swing, no rupture.
+                        _splitAt = swung ? now + 1.5f : 0f;
+                        if (!swung)
+                            Plugin.Log.LogInfo("Alfrik's Earthsplitter: no swing, no rupture");
                     }
                     break;
                 case Act.Split:
                     Drive(c, Vector3.zero, toTarget, false);
-                    if (_splitAt > 0f && now >= _splitAt)
+                    if (_splitAt > 0f && (now >= _splitAt || Struck(_actStart)))
                     {
+                        Plugin.Log.LogInfo("Alfrik's Earthsplitter rupture goes out " + (Struck(_actStart) ? "with the blow" : "by time"));
                         _splitAt = 0f;
                         GroundWave.SendSplit(c, toTarget);
                     }
@@ -549,7 +647,7 @@ namespace Alfrik
                     {
                         Unblockable(1.3f);
                         _heavyUntil = now + 0.3f;
-                        Swing(c, true);
+                        Swing(c, true, "Executioner");
                         // Executioner's Stomp: now and then the chop flows straight into a War Stomp.
                         if (now >= _nextExecStomp && UnityEngine.Random.value < 0.5f)
                         {
@@ -574,6 +672,7 @@ namespace Alfrik
                     {
                         _retribUntil = now + 5f;
                         _retaliate = null;
+                        _retribHits = _retribAnswers = 0;
                         Fx.Send(Fx.IronSkin);
                         EndAct(c);
                     }
@@ -583,15 +682,19 @@ namespace Alfrik
                     if (now >= _actEnd)
                     {
                         _heavyUntil = now + 0.3f;
-                        Swing(c, true);
-                        _strikeAt = now + 0.4f;
+                        bool swung = Swing(c, true);
                         Start(Act.Ring, 2.5f);
+                        // The ring is marked as the hammer strikes the ground (its hit frame); no swing, no ring.
+                        _strikeAt = swung ? now + 1.5f : 0f;
+                        if (!swung)
+                            Plugin.Log.LogInfo("Alfrik's Grave Ring: no swing, no ring");
                     }
                     break;
                 case Act.Ring:
                     Drive(c, Vector3.zero, toTarget, false);
-                    if (_strikeAt > 0f && now >= _strikeAt)
+                    if (_strikeAt > 0f && (now >= _strikeAt || Struck(_actStart)))
                     {
+                        Plugin.Log.LogInfo("Alfrik's Grave Ring is marked " + (Struck(_actStart) ? "with the blow" : "by time"));
                         _strikeAt = 0f;
                         Strikes.Send(c, c.transform.position, Strikes.GraveRing);
                     }
@@ -674,7 +777,7 @@ namespace Alfrik
                         SwingBoost = 1f + 0.3f * _swings;
                         if (last)
                             _heavyUntil = now + 0.3f;
-                        if (Swing(c, last))
+                        if (Swing(c, last, "FURY blow " + (_swings + 1)))
                         {
                             Fx.Send(Fx.FurySlash);
                             _swings++;
@@ -723,7 +826,7 @@ namespace Alfrik
                 _target = attacker;
                 Unblockable(1.2f);
                 _heavyUntil = Time.time + 0.3f;
-                Swing(c, true);
+                Swing(c, true, "Iron Wall answer");
                 Fx.Send(Fx.FurySlash);
                 Plugin.Log.LogInfo("Alfrik answers the third blow on his Iron Wall");
             }

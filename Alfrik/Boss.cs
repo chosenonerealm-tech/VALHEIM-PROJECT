@@ -205,6 +205,7 @@ namespace Alfrik
             _char.SetHealth(_char.GetMaxHealth());
             _gearSignature?.SetValue(npc, null);
             Brain.NewPhase();
+            Plugin.Log.LogInfo("Alfrik: summoned, phase 1, " + _char.GetMaxHealth().ToString("0") + " health");
             return _name + ", " + Title + ", comes down from the sky: " + Phases.Length + " phase(s) of " +
                 _char.GetMaxHealth().ToString("0") + " health. Beat him and he is yours.";
         }
@@ -335,6 +336,7 @@ namespace Alfrik
                 _baseWalk = _char.m_walkSpeed;
             }
             _speedFactor = 1f;
+            _barShare = -1f;
             _state = 0;
             _phase = 0;
             _lastState = -1;
@@ -370,6 +372,7 @@ namespace Alfrik
             _phase = zdo.GetInt(PhaseKey, 1);
             _rage = zdo.GetBool(RageKey, false);
             _char.m_boss = _state == 1;
+            KeepMaxHealth();
             KeepSmooth();
             KeepAnimating();
             DamageReport();
@@ -413,6 +416,41 @@ namespace Alfrik
             KeepWeapon();
         }
 
+        private static int _healthFixes;
+        private static float _barShare = -1f, _lastHealthFix = -100f;
+        private static bool _healthFixStopped;
+
+        // Owner, as a boss: his bar is a phase's full health ([Boss] PhaseHealth). The 0.9.8-0.9.10 logs show a bar of about
+        // 66 after he was loaded mid-fight (something else set his max health); it is put back, the bar as full as it was
+        // (as last seen right, so a max health cut that also cut his health never refills the bar). Reset again within
+        // 10 s, it is left alone and logged, rather than fought over every frame.
+        private static void KeepMaxHealth()
+        {
+            if (_state != 1 || !_view.IsOwner() || InTransition || Entrance.Active || _char.IsDead() || _healthFixStopped)
+                return;
+            float want = PhaseMaxHealth(), max = _char.GetMaxHealth();
+            if (want <= 0f)
+                return;
+            if (Mathf.Abs(max - want) < 1f)
+            {
+                _barShare = Mathf.Clamp01(_char.GetHealth() / want);
+                return;
+            }
+            if (Time.time - _lastHealthFix < 10f)
+            {
+                _healthFixStopped = true;
+                Plugin.Log.LogWarning("Alfrik's max health keeps being set to " + max.ToString("0") + " by something else; no longer put back");
+                return;
+            }
+            _lastHealthFix = Time.time;
+            float share = _barShare >= 0f ? _barShare : (max > 0f ? Mathf.Clamp01(_char.GetHealth() / max) : 1f);
+            _char.SetMaxHealth(want);
+            _char.SetHealth(Mathf.Max(2f, want * share));
+            if (_healthFixes++ < 5)
+                Plugin.Log.LogInfo("Alfrik's max health was " + max.ToString("0") + ", set to " + want.ToString("0") + " (phase " + _phase +
+                    ", bar kept at " + (share * 100f).ToString("0") + "%)");
+        }
+
         private static RigidbodyInterpolation _baseInterpolation;
         private static bool _smoothLogged;
 
@@ -423,7 +461,9 @@ namespace Alfrik
             Rigidbody body = _char.GetComponent<Rigidbody>();
             if (body == null)
                 return;
-            RigidbodyInterpolation want = _view.IsOwner() && !Entrance.Active && !Brain.Leaping ?RigidbodyInterpolation.Interpolate : _baseInterpolation;
+            // In Odin's Fall his kinematic body is moved along the arc: no smoothing then (Brain.HoldInAir keeps it so).
+            RigidbodyInterpolation want = _view.IsOwner() && !Entrance.Active && !Brain.Leaping ? RigidbodyInterpolation.Interpolate
+                : (Brain.Leaping ? RigidbodyInterpolation.None : _baseInterpolation);
             if (body.interpolation == want)
                 return;
             if (!_smoothLogged)
@@ -569,6 +609,7 @@ namespace Alfrik
             Brain.NewPhase();
             _updateMaxHealth?.Invoke(_npc, null);
             _char.SetHealth(_char.GetMaxHealth());
+            Plugin.Log.LogInfo("Alfrik: phase " + _phase + ", " + CurrentPhase?.Name + ", " + _char.GetMaxHealth().ToString("0") + " health");
             // The new phase's weapon straight into his hands (Gear: the old one out, the new one in and equipped),
             // instead of a whole gear rebuild that re-equipped him over and over.
             Gear(_npc);

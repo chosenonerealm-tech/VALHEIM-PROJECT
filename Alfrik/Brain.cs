@@ -138,6 +138,16 @@ namespace Alfrik
             harmony.Patch(AccessTools.Method(typeof(Humanoid), nameof(Humanoid.EquipItem)), postfix: new HarmonyMethod(typeof(Brain), nameof(Equipped)));
             harmony.Patch(AccessTools.Method(typeof(Humanoid), nameof(Humanoid.StartAttack)), prefix: new HarmonyMethod(typeof(Brain), nameof(NoBlindLeap)),
                 postfix: new HarmonyMethod(typeof(Brain), nameof(Swung)));
+            MethodInfo trigger = AccessTools.Method(typeof(Humanoid), "OnAttackTrigger", Type.EmptyTypes);
+            if (trigger != null)
+                harmony.Patch(trigger, postfix: new HarmonyMethod(typeof(Brain), nameof(Impact)));
+            else
+                Plugin.Log.LogWarning("Alfrik: no Humanoid.OnAttackTrigger to time his blows by; they fall on timers");
+            MethodInfo damage = AccessTools.Method(typeof(Character), nameof(Character.Damage), new[] { typeof(HitData) });
+            if (damage != null)
+                harmony.Patch(damage, prefix: new HarmonyMethod(typeof(Brain), nameof(Dealt)));
+            else
+                Plugin.Log.LogWarning("Alfrik: no Character.Damage to count his blows by; no 'lands on' lines");
         }
 
         internal static void Trigger(string name)
@@ -237,8 +247,11 @@ namespace Alfrik
             // animation is cut short by the next one (combos, abilities and swings all wait for it).
             bool attacking = c.InAttack();
             if (_wasAttacking && !attacking)
+            {
+                EndLabel();
                 _recoverUntil = Time.time + (_burstLeft > 0 || _act == Act.TwinChain || _act == Act.FuryChain || _act == Act.Charge ||
                     _act == Act.SweepChain || _act == Act.ExecFollow ? 0.1f : Phase2 ? 0.5f : 0.35f);
+            }
             _wasAttacking = attacking;
             bool recovering = Time.time < _recoverUntil;
             // In his own swings the AI is held, so it cannot walk him in and stop him again under the swing; he only
@@ -258,6 +271,7 @@ namespace Alfrik
             {
                 if (Phase2)
                 {
+                    RetribEnd();
                     Defend2(c);
                     Stomp(c);
                 }
@@ -824,14 +838,22 @@ namespace Alfrik
                         {
                             // A real swing, so the bash has an animation; the shove lands with it.
                             Drive(c, Vector3.zero, toTarget, false);
-                            Swing(c, false);
-                            _shoulderAt = now + 0.3f;
+                            bool swung = Swing(c, false);
+                            _swingAt = now;
+                            // Phase 2's two-handed swing is slower: the shove waits for the swing's own blow (its hit
+                            // frame), and with no swing there is no bash.
+                            _shoulderAt = now + (Phase2 ? 1.2f : 0.3f);
+                            if (Phase2 && !swung)
+                            {
+                                _shoulderHit = true;
+                                Plugin.Log.LogInfo("Alfrik's Shoulder Breaker: no swing, no bash");
+                            }
                         }
                     }
                     else if (!_shoulderHit)
                     {
                         Drive(c, Vector3.zero, toTarget, false);
-                        if (now >= _shoulderAt)
+                        if (now >= _shoulderAt || (Phase2 && Struck(_swingAt)))
                             ShoulderHit(c);
                     }
                     else if (!c.InAttack())
@@ -859,6 +881,10 @@ namespace Alfrik
                 // Cut short in the air (his death, the phase change): back on his feet where he is.
                 if (_act == Act.Fall)
                     EndLeap(c);
+                // Phase 2: the next move waits a moment after this one ends (not after it began), so his ordinary swings
+                // come between his moves instead of one move straight after another.
+                if (Phase2 && _act != Act.None && _act != Act.Wall && _act != Act.ParryStance && _act != Act.Break)
+                    _nextAbility = Mathf.Max(_nextAbility, Time.time + UnityEngine.Random.Range(2.5f, 4f));
                 if (_act != Act.None)
                     c.SetMoveDir(Vector3.zero);
             }
@@ -905,7 +931,10 @@ namespace Alfrik
             // Retribution: a melee hit close by is answered with a sweep as soon as he is free (Think).
             if (Retribution && !hit.m_ranged && hit.GetAttacker() is Character striker &&
                 Flat(striker.transform.position - __instance.transform.position).magnitude <= 4.5f)
+            {
                 _retaliate = striker;
+                _retribHits++;
+            }
             if (_act == Act.Wall || _act == Act.Advance)
                 return WallHit(hit);
             if ((_act != Act.Guard && _act != Act.ParryStance) || hit.m_ranged)
@@ -925,7 +954,7 @@ namespace Alfrik
             Unblockable(1.5f);
             _target = attacker;
             _heavyUntil = Time.time + 0.3f;
-            Swing(c, true);
+            Swing(c, true, punishing ? "Punishing Parry counter" : "Blade Catch counter");
             _nextAbility = Time.time + 0.5f;
             return false;
         }
@@ -1148,7 +1177,10 @@ namespace Alfrik
         {
             _shoulderHit = true;
             Unblockable(0.4f);
-            foreach (Character enemy in InFront(c, 2.2f, 70f))
+            List<Character> struck = InFront(c, 2.2f, 70f);
+            Plugin.Log.LogInfo((Phase2 ? "Alfrik's Shoulder Breaker hits " : "Alfrik's Shoulder Charge hits ") + struck.Count +
+                (Phase2 ? (Struck(_swingAt) ? " (with the blow)" : " (by time)") : ""));
+            foreach (Character enemy in struck)
             {
                 Vector3 dir = Flat(enemy.transform.position - c.transform.position).normalized;
                 var hit = new HitData();
@@ -1439,10 +1471,16 @@ namespace Alfrik
                 secondaryAttack = false;
         }
 
-        // Humanoid.StartAttack postfix, on the game that owns him: each Skeggöld swing whooshes (its own sounds are gone).
-        private static void Swung(Humanoid __instance, bool __result)
+        // Humanoid.StartAttack postfix, on the game that owns him: each Fjallbrjótr swing whooshes (its own sounds are gone),
+        // and every swing is counted for the pace report (slams apart).
+        private static void Swung(Humanoid __instance, bool secondaryAttack, bool __result)
         {
-            if (__result && __instance == AlfrikBoss.Char && Phase2 && AlfrikBoss.View != null && AlfrikBoss.View.IsOwner())
+            if (!__result || __instance != AlfrikBoss.Char || AlfrikBoss.View == null || !AlfrikBoss.View.IsOwner())
+                return;
+            _swingsStarted++;
+            if (secondaryAttack)
+                _slams++;
+            if (Phase2)
                 Fx.Send(Fx.Swing2);
         }
 
@@ -1558,7 +1596,13 @@ namespace Alfrik
             if (_swingFrames > 0)
                 Plugin.Log.LogInfo("Alfrik swings, 15 s: " + _swingFrames + " frames, turn reversals " + _turnFlips + ", back-and-forth steps " +
                     _stepFlips + ", animation speed changes " + _speedChanges + ", stagger bar " + _staggers + " stagger(s)");
+            // How busy he is: moves begun, swings begun (slams among them), and hit frames reached (a swing whose animation
+            // never plays reaches none).
+            if (AlfrikBoss.State == 1 && (_moves > 0 || _swingsStarted > 0))
+                Plugin.Log.LogInfo("Alfrik's pace, 15 s: " + _moves + " move(s), " + _swingsStarted + " swing(s) (" + _slams + " slam(s)), " +
+                    _impacts + " hit frame(s)");
             _equips = _swingFrames = _turnFlips = _stepFlips = _speedChanges = _staggers = 0;
+            _moves = _swingsStarted = _slams = _impacts = 0;
         }
     }
 }

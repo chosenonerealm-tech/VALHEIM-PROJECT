@@ -162,8 +162,8 @@ namespace Alfrik
                 return;
             _nextHoldReport = Time.time + 8f;
             _holdReports++;
-            Plugin.Log.LogInfo(string.Format("Skeggold hold: left fist {0:0.00} m off the haft, bent {1:0}% ({2:0} deg), right fist {3:0.00} m from the game's hand",
-                off, weight * 100f, bent, shift));
+            Plugin.Log.LogInfo(string.Format("Skeggold hold: left fist {0:0.00} m off the haft, bent {1:0}% ({2:0} deg), right fist {3:0.00} m from the game's hand, in a {4}",
+                off, weight * 100f, bent, shift, Brain.SlamUnderWay ? "slam" : "swing"));
         }
 
         private static void Lay(GameObject axe, Animator animator, bool left, float gripLow)

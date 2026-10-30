@@ -32,17 +32,17 @@ namespace Alfrik
             ZRoutedRpc.instance.InvokeRoutedRPC(ZRoutedRpc.Everybody, rpc, view.GetZDO().m_uid, c.transform.position + dir * 1.2f, dir);
         }
 
-        private static void OnWave(long sender, ZDOID id, Vector3 from, Vector3 dir) => Run(id, from, dir, 20f, 16f, 1.4f);
+        private static void OnWave(long sender, ZDOID id, Vector3 from, Vector3 dir) => Run(id, from, dir, 20f, 16f, 1.4f, "FURY wave");
 
-        private static void OnSplit(long sender, ZDOID id, Vector3 from, Vector3 dir) => Run(id, from, dir, SplitLength, SplitSpeed, SplitRadius);
+        private static void OnSplit(long sender, ZDOID id, Vector3 from, Vector3 dir) => Run(id, from, dir, SplitLength, SplitSpeed, SplitRadius, "Earthsplitter");
 
-        private static void Run(ZDOID id, Vector3 from, Vector3 dir, float length, float speed, float radius)
+        private static void Run(ZDOID id, Vector3 from, Vector3 dir, float length, float speed, float radius, string name)
         {
             GameObject instance = ZNetScene.instance == null ? null : ZNetScene.instance.FindInstance(id);
             Humanoid thrower = instance == null ? null : instance.GetComponent<Humanoid>();
             if (thrower == null)
                 return;
-            new GameObject("Alfrik_Wave").AddComponent<GroundWaveRun>().Begin(thrower, from, dir, length, speed, radius);
+            new GameObject("Alfrik_Wave").AddComponent<GroundWaveRun>().Begin(thrower, from, dir, length, speed, radius, name);
             Sounds.PlayAt("p2boom", from, 1f, 80f);
             Sounds.PlayAt("p2rumble", from, 0.9f, 60f);
             GameCamera.instance?.AddShake(from, 30f, 1.5f, false);
@@ -57,10 +57,12 @@ namespace Alfrik
         private bool _owner;
         private Vector3 _dir, _at;
         private float _travelled, _nextStep, _length, _speed, _radius;
+        private string _name;
         private readonly HashSet<Character> _hit = new HashSet<Character>();
 
-        internal void Begin(Humanoid thrower, Vector3 from, Vector3 dir, float length, float speed, float radius)
+        internal void Begin(Humanoid thrower, Vector3 from, Vector3 dir, float length, float speed, float radius, string name)
         {
+            _name = name;
             _radius = radius;
             _thrower = thrower;
             _dir = dir;
@@ -76,6 +78,9 @@ namespace Alfrik
         {
             if (_thrower == null || _travelled >= _length)
             {
+                // The end of the run, on the game that owns him: how many it caught.
+                if (_owner && _thrower != null)
+                    Plugin.Log.LogInfo("Alfrik's " + _name + " catches " + _hit.Count);
                 Destroy(gameObject);
                 return;
             }
