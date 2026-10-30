@@ -1186,7 +1186,8 @@ namespace Alfrik
         {
             _shoulderHit = true;
             Unblockable(0.4f);
-            List<Character> struck = InFront(c, 2.2f, 70f);
+            // Phase 2's shove lands with the battle axe swing, so it reaches as far as that swing does.
+            List<Character> struck = Phase2 ? InFront(c, Reach + 0.4f, 90f) : InFront(c, 2.2f, 70f);
             Plugin.Log.LogInfo((Phase2 ? "Alfrik's Shoulder Breaker hits " : "Alfrik's Shoulder Charge hits ") + struck.Count +
                 (Phase2 ? (Struck(_swingAt) ? " (with the blow)" : " (by time)") : ""));
             foreach (Character enemy in struck)

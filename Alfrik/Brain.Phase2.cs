@@ -398,8 +398,13 @@ namespace Alfrik
             if (_retribUntil <= 0f || Time.time < _retribUntil)
                 return;
             _retribUntil = 0f;
+            // A blow left unanswered: whose, and how far off they were when it ended.
+            string waiting = _retaliate != null && AlfrikBoss.Char != null
+                ? " (" + _retaliate.GetHoverName() + " still owed one, " +
+                  Flat(_retaliate.transform.position - AlfrikBoss.Char.transform.position).magnitude.ToString("0.0") + " m off)"
+                : "";
             _retaliate = null;
-            Plugin.Log.LogInfo("Alfrik's Retribution ends: " + _retribHits + " melee blow(s) taken close by, " + _retribAnswers + " answered");
+            Plugin.Log.LogInfo("Alfrik's Retribution ends: " + _retribHits + " melee blow(s) taken close by, " + _retribAnswers + " answered" + waiting);
         }
 
         // War Stomp, checked every frame he is free: someone at his side or back within 4 m, or two enemies that close,

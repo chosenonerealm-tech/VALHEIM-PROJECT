@@ -97,6 +97,7 @@ Watch these when touching related code:
   reach.
 - War Horn: short hold (0.8 s) and +30% speed for him for 6 s.
 - Odin's Wrath's bolt and light fade out over 1.2 s instead of blinking.
+- Phase-2 Shoulder bash reaches as far as the battle axe swing (it hit 0 of 4 in the 0.9.11 log).
 - New log lines: "Alfrik's Grave Ring / War Stomp / Odin's Fall landing / Earthsplitter catches N (M jumped it)",
   "Alfrik: Odin's Charge at X m (stamina N% | 3 barrages)", "Alfrik's Odin's Charge slash N lands on N",
   "… ends after N of 3 blows: target out of reach", "Executioner: target out of reach … no chop",
