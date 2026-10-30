@@ -1,0 +1,583 @@
+[Info   :   BepInEx] Loading [Alfrik 0.9.12]
+[Error  : Unity Log] InvalidOperationException: Steamworks is not initialized.
+[Info   :    Alfrik] VRM avatar 'Alfrik' goes on the one Vikings for Hire viking named Alfrik
+[Info   :    Alfrik] Alfrik, The Left Fist of Odin: 2 boss phase(s), then a Berserker companion (console: alfrik)
+[Info   :    Alfrik] Alfrik sounds loaded: catch, cleave x2, dodge, growl x2, heartbeat, hit x2, hook, land, mark, music_phase1, music_phase2, p2bleed x2, p2boom, p2chain x3, p2clash x10, p2glint x3, p2growl, p2hit x2, p2roar, p2rumble, p2swing x4, parry x2, punch x5, raven, roar, rune x2, shoulder, shoulder_whoosh, spin x2, steam, swing x4, thunder, yield
+[Info   :    Alfrik] Hugr & Hamr: default ((0.33, 0.92, 0.10)) gets the axe model
+[Info   :    Alfrik] Hugr & Hamr: default ((0.47, 0.83, 0.09)) gets the axe model
+[Warning:    Alfrik] Hugr & Hamr: the held axes (Berzerkr) cannot be read; they keep the Berserkir look
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr [Transform, Rigidbody, ZNetView, ZSyncTransform, ItemDrop, ParticleSystemRenderer, ParticleSystem]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg/LeftFoot [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToeBase [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg/RightFoot [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg/RightFoot/RightToeBase [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck/Head [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck/Head/Jaw [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2/RightHandRing3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail [Transform, MeleeWeaponTrail]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail/base [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail/tip [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/Berzerkr [Transform, SkinnedMeshRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default [Transform, MeshFilter, MeshRenderer, BoxCollider]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow [Transform, ParticleIntensityScaler]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Particle System [Transform, ParticleSystem, ParticleSystemRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Particle System Force Field [Transform, ParticleSystemForceField]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Point light [Transform, Light, LightLod]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default [Transform, MeshFilter, MeshRenderer, BoxCollider]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1) [Transform, ParticleIntensityScaler]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Particle System [Transform, ParticleSystem, ParticleSystemRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Particle System Force Field [Transform, ParticleSystemForceField]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Point light [Transform, Light, LightLod]
+[Info   :    Alfrik] Fjallbrjotr swing: battleaxe_attack from Battleaxe (Horizontal, reach 2.5 m); the slam (swing_sledge) is his heavy blow
+[Info   :    Alfrik] Fjallbrjotr on SledgeIron: blunt 175, force 200, heavy attack swing_sledge
+[Info   :    Alfrik] Fjallbrjotr slam: Area, reach 2.0 m, radius 4.0 -> 6.0 m, effects 3 + 0
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Info   :    Alfrik] Alfrik's max health was 66, set to 4000 (phase 2, bar kept at 35%)
+[Info   :    Alfrik] Alfrik's animator was Fixed / CullUpdateTransforms; now Normal / AlwaysAnimate
+[Info   :    Alfrik] VRM avatar 'Alfrik' loaded
+[Info   :    Alfrik] Hugr & Hamr grip from SledgeIron: haft (0.00, 0.00, 1.00), blade (-1.00, 0.00, 0.00), length 1.36, centre (0.00, 0.00, 0.28)
+[Info   :    Alfrik] Hugr & Hamr grip from AxeIron: haft (0.00, 0.00, 1.00), blade (1.00, 0.00, 0.00), length 0.88, centre (0.11, 0.00, 0.28)
+[Info   :    Alfrik] Alfrik equipped $item_arrow_wood from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_chest_leather from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_legs_rags from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_cape_deerhide from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_club from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.DMD<Humanoid::EquipBestWeapon> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear < VikingNpc.Update
+[Info   :    Alfrik] Alfrik equipped Fjallbrjótr from: Humanoid.DMD<Humanoid::EquipItem> < AlfrikBoss.Gear < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear < VikingNpc.Update
+[Info   :    Alfrik] Alfrik's eye glow is placed from the avatar's head bone (no eye bones), (-0.036, 0.116, 0.095) from the head
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 18.1 m
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Skeggold hold: left fist 0.80 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik re-equipped 6 times in 15 s
+[Info   :    Alfrik] Alfrik swings, 15 s: 70 frames, turn reversals 0, back-and-forth steps 2, animation speed changes 4, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 1 swing(s) (0 slam(s)), 1 hit frame(s)
+[Info   :    Alfrik] Alfrik took 2 hits in 15 s (phase 2): 58 damage = 1.5% of the bar, biggest hit 34 before the cap, 0 capped at 2.5%
+[Info   :    Alfrik] Alfrik's FURY blow 1 lands on 1
+[Info   :    Alfrik] Alfrik after-swing trace 1 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik]     rig: hips -0.022 0.841 -0.061 | avatar hips -0.022 0.938 -0.060 | pose 0.00
+[Info   :    Alfrik]   0.00 FuryChain False False move 1.00/0.00 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.022 0.840 -0.061 | avatar hips -0.022 0.937 -0.060 | pose 0.00
+[Info   :    Alfrik]   0.01 FuryChain False False move 1.00/0.00 moved 0.1/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.838 -0.061 | avatar hips -0.022 0.936 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.03 FuryChain False False move 1.00/0.00 moved 0.5/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.837 -0.061 | avatar hips -0.022 0.935 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.04 FuryChain False False move 1.00/0.00 moved 1.0/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.011 0.860 -0.047 | avatar hips -0.011 0.957 -0.045 | pose 0.00
+[Info   :    Alfrik]   0.06 FuryChain False False move 1.00/0.00 moved 1.4/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 0.888 -0.024 | avatar hips -0.005 0.984 -0.024 | pose 0.00
+[Info   :    Alfrik]   0.07 FuryChain False False move 1.00/0.00 moved 1.7/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.006 0.911 -0.008 | avatar hips -0.006 1.007 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.09 FuryChain False False move 1.00/0.00 moved 2.2/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.917 -0.008 | avatar hips -0.006 1.012 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.10 FuryChain False False move 1.00/0.00 moved 2.6/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.923 -0.007 | avatar hips -0.007 1.018 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.12 FuryChain False False move 1.00/0.00 moved 3.1/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.933 -0.007 | avatar hips -0.007 1.028 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.13 FuryChain False False move 1.00/0.00 moved 3.4/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.943 -0.007 | avatar hips -0.007 1.038 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.15 FuryChain False False move 1.00/0.00 moved 4.0/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.948 -0.026 | avatar hips -0.010 1.042 -0.026 | pose 0.00
+[Info   :    Alfrik]   0.16 FuryChain False False move 1.00/0.00 moved 4.3/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.012 0.950 -0.060 | avatar hips -0.012 1.044 -0.058 | pose 0.00
+[Info   :    Alfrik]   0.18 FuryChain False False move 1.00/0.00 moved 4.7/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.014 0.957 -0.079 | avatar hips -0.014 1.052 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.19 FuryChain False False move 1.00/0.00 moved 5.1/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.014 0.968 -0.079 | avatar hips -0.014 1.062 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.21 FuryChain False False move 1.00/0.00 moved 5.8/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.015 0.979 -0.076 | avatar hips -0.014 1.072 -0.074 | pose 0.00
+[Info   :    Alfrik]   0.22 FuryChain False False move 1.00/0.00 moved 6.0/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.015 0.996 -0.074 | avatar hips -0.015 1.089 -0.072 | pose 0.00
+[Info   :    Alfrik]   0.23 FuryChain False False move 1.00/0.00 moved 6.6/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.012 1.005 -0.078 | avatar hips -0.012 1.098 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.25 FuryChain False False move 1.00/0.00 moved 7.2/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.012 1.008 -0.079 | avatar hips -0.012 1.101 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.26 FuryChain False False move 1.00/0.00 moved 7.4/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.009 1.013 -0.089 | avatar hips -0.008 1.105 -0.086 | pose 0.00
+[Info   :    Alfrik]   0.28 FuryChain False False move 1.00/0.00 moved 7.4/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 1.016 -0.098 | avatar hips -0.005 1.108 -0.095 | pose 0.00
+[Info   :    Alfrik]   0.29 FuryChain False False move 1.00/0.00 moved 7.8/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 1.013 -0.103 | avatar hips -0.003 1.106 -0.101 | pose 0.00
+[Info   :    Alfrik]   0.31 FuryChain False False move 1.00/0.00 moved 8.2/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 1.006 -0.104 | avatar hips -0.003 1.098 -0.101 | pose 0.00
+[Info   :    Alfrik]   0.32 FuryChain False False move 1.00/0.00 moved 8.0/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.002 0.989 -0.106 | avatar hips -0.002 1.082 -0.103 | pose 0.00
+[Info   :    Alfrik]   0.34 FuryChain False False move 1.00/0.00 moved 7.8/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.001 0.971 -0.107 | avatar hips -0.001 1.064 -0.104 | pose 0.00
+[Info   :    Alfrik]   0.35 FuryChain False False move 1.00/0.00 moved 7.9/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.948 -0.107 | avatar hips 0.000 1.043 -0.104 | pose 0.00
+[Info   :    Alfrik]   0.37 FuryChain False False move 1.00/0.00 moved 8.3/0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.922 -0.105 | avatar hips 0.000 1.017 -0.102 | pose 0.00
+[Info   :    Alfrik]   0.38 FuryChain False False move 1.00/0.00 moved 8.3/0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.902 -0.103 | avatar hips 0.000 0.997 -0.101 | pose 0.00
+[Info   :    Alfrik]   0.40 FuryChain False False move 1.00/0.00 moved 7.9/0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.886 -0.099 | avatar hips 0.000 0.982 -0.097 | pose 0.00
+[Info   :    Alfrik]   0.41 FuryChain False False move 1.00/0.00 moved 7.6/0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.877 -0.097 | avatar hips 0.000 0.973 -0.094 | pose 0.00
+[Info   :    Alfrik]   0.43 FuryChain False False move 1.00/0.00 moved 7.9/0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.872 -0.093 | avatar hips 0.002 0.968 -0.090 | pose 0.00
+[Info   :    Alfrik]   0.44 FuryChain False False move 1.00/0.00 moved 8.2/0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.873 -0.088 | avatar hips 0.002 0.969 -0.086 | pose 0.00
+[Info   :    Alfrik]   0.46 FuryChain False False move 1.00/0.00 moved 8.2/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.873 -0.086 | avatar hips 0.002 0.969 -0.084 | pose 0.00
+[Info   :    Alfrik]   0.47 FuryChain False False move 1.00/0.00 moved 7.9/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.877 -0.082 | avatar hips 0.002 0.973 -0.080 | pose 0.00
+[Info   :    Alfrik]   0.48 FuryChain False False move 1.00/0.00 moved 8.0/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.880 -0.081 | avatar hips 0.002 0.977 -0.078 | pose 0.00
+[Info   :    Alfrik]   0.50 FuryChain False False move 1.00/0.00 moved 8.3/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.888 -0.080 | avatar hips 0.002 0.984 -0.078 | pose 0.00
+[Info   :    Alfrik]   0.51 FuryChain False False move 1.00/0.00 moved 8.2/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.903 -0.079 | avatar hips 0.001 0.999 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.53 FuryChain False False move 1.00/0.00 moved 7.8/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.920 -0.078 | avatar hips 0.001 1.015 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.54 FuryChain False False move 1.00/0.00 moved 8.0/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.935 -0.079 | avatar hips 0.002 1.030 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.56 FuryChain False False move 1.00/0.00 moved 8.0/0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.956 -0.080 | avatar hips 0.002 1.051 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.57 FuryChain False False move 1.00/0.00 moved 7.8/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.974 -0.078 | avatar hips 0.001 1.068 -0.075 | pose 0.00
+[Info   :    Alfrik]   0.59 FuryChain False False move 1.00/0.00 moved 8.1/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.992 -0.081 | avatar hips 0.001 1.086 -0.079 | pose 0.00
+[Info   :    Alfrik]   0.60 FuryChain False False move 1.00/0.00 moved 7.8/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 1.009 -0.085 | avatar hips 0.001 1.102 -0.083 | pose 0.00
+[Info   :    Alfrik]   0.62 FuryChain False False move 1.00/0.00 moved 7.7/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 1.016 -0.090 | avatar hips 0.001 1.109 -0.087 | pose 0.00
+[Info   :    Alfrik]   0.63 FuryChain False False move 1.00/0.00 moved 8.1/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 1.019 -0.094 | avatar hips 0.001 1.111 -0.091 | pose 0.00
+[Info   :    Alfrik]   0.65 FuryChain False False move 1.00/0.00 moved 8.2/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 1.019 -0.099 | avatar hips 0.002 1.112 -0.096 | pose 0.00
+[Info   :    Alfrik]   0.66 FuryChain False False move 1.00/0.00 moved 7.9/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 1.017 -0.100 | avatar hips 0.001 1.109 -0.098 | pose 0.00
+[Info   :    Alfrik]   0.68 FuryChain False False move 1.00/0.00 moved 7.9/0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 1.012 -0.102 | avatar hips 0.001 1.105 -0.099 | pose 0.00
+[Info   :    Alfrik]   0.69 FuryChain False False move 1.00/0.00 moved 7.9/0.5 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik] Alfrik's FURY ends after 2 of 3 blows: target out of reach (2.9 m)
+[Info   :    Alfrik] Alfrik's FURY blow 2 lands on 1
+[Info   :    Alfrik] Skeggold hold: left fist 0.30 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 12.2 m
+[Info   :    Alfrik] Alfrik: Earthsplitter at 9.5 m
+[Info   :    Alfrik] Skeggold hold: left fist 0.48 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a slam
+[Info   :    Alfrik] Alfrik swings, 15 s: 343 frames, turn reversals 0, back-and-forth steps 6, animation speed changes 11, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 3 swing(s) (1 slam(s)), 2 hit frame(s)
+[Info   :    Alfrik] Alfrik's Earthsplitter rupture goes out with the blow
+[Info   :    Alfrik] Alfrik's Earthsplitter catches 1 (0 jumped it)
+[Info   :    Alfrik] Alfrik after-swing trace 2 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik]     rig: hips -0.023 0.841 -0.061 | avatar hips -0.022 0.938 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.00 None True False move 0.00/0.00 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.839 -0.061 | avatar hips -0.022 0.937 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.02 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.838 -0.061 | avatar hips -0.022 0.936 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.03 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.2 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.837 -0.061 | avatar hips -0.022 0.935 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.05 None True False move 0.00/0.00 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.836 -0.061 | avatar hips -0.022 0.934 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.07 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.835 -0.061 | avatar hips -0.022 0.933 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.08 None True False move 0.00/0.00 moved 0.0/0.0 turn 0.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.835 -0.061 | avatar hips -0.022 0.932 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.10 None True False move 0.94/-0.02 moved 0.3/0.0 turn 1.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.834 -0.061 | avatar hips -0.022 0.931 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.12 None True False move 0.94/-0.03 moved 0.8/-0.1 turn 0.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.011 0.865 -0.046 | avatar hips -0.010 0.961 -0.045 | pose 0.00
+[Info   :    Alfrik]   0.13 None True False move 0.94/-0.04 moved 1.2/-0.1 turn 0.7 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 0.902 -0.025 | avatar hips -0.004 0.998 -0.024 | pose 0.00
+[Info   :    Alfrik]   0.15 None True False move 0.94/-0.04 moved 1.8/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 0.906 -0.025 | avatar hips -0.004 1.001 -0.024 | pose 0.00
+[Info   :    Alfrik]   0.16 None True False move 0.98/-0.01 moved 2.4/-0.1 turn 0.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.937 -0.008 | avatar hips -0.007 1.032 -0.008 | pose 0.00
+[Info   :    Alfrik]   0.18 None True False move 0.98/-0.02 moved 2.9/-0.1 turn 0.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.945 -0.008 | avatar hips -0.007 1.039 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.20 None True False move 1.00/0.00 moved 3.3/-0.1 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.955 -0.007 | avatar hips -0.007 1.049 -0.007 | pose 0.00
+[Info   :    Alfrik]   0.21 None True False move 1.00/0.00 moved 3.8/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.960 -0.028 | avatar hips -0.010 1.054 -0.028 | pose 0.00
+[Info   :    Alfrik]   0.23 None True False move 1.00/0.00 moved 4.4/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.969 -0.030 | avatar hips -0.010 1.063 -0.029 | pose 0.00
+[Info   :    Alfrik]   0.24 None True False move 1.00/0.00 moved 4.9/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.012 0.973 -0.060 | avatar hips -0.012 1.066 -0.058 | pose 0.00
+[Info   :    Alfrik]   0.26 None True False move 1.00/0.00 moved 5.6/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.014 0.981 -0.078 | avatar hips -0.013 1.075 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.28 None True False move 1.00/0.00 moved 6.1/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.014 0.992 -0.076 | avatar hips -0.014 1.085 -0.074 | pose 0.00
+[Info   :    Alfrik]   0.29 None True False move 1.00/0.00 moved 6.8/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.015 1.002 -0.073 | avatar hips -0.014 1.095 -0.071 | pose 0.00
+[Info   :    Alfrik]   0.31 None True False move 1.00/0.00 moved 7.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.011 1.008 -0.080 | avatar hips -0.011 1.101 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.33 None True False move 1.00/0.00 moved 7.6/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.011 1.006 -0.080 | avatar hips -0.011 1.099 -0.078 | pose 0.00
+[Info   :    Alfrik]   0.34 None True False move 1.00/0.00 moved 8.2/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 1.007 -0.090 | avatar hips -0.007 1.100 -0.087 | pose 0.00
+[Info   :    Alfrik]   0.36 None True False move 1.00/0.00 moved 8.8/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 1.005 -0.099 | avatar hips -0.003 1.098 -0.097 | pose 0.00
+[Info   :    Alfrik]   0.38 None True False move 1.00/0.00 moved 9.2/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.001 0.989 -0.105 | avatar hips -0.001 1.082 -0.103 | pose 0.00
+[Info   :    Alfrik]   0.39 None True False move 1.00/0.00 moved 8.9/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.001 0.968 -0.106 | avatar hips -0.001 1.062 -0.104 | pose 0.00
+[Info   :    Alfrik]   0.41 None True False move 1.00/0.00 moved 8.8/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.941 -0.105 | avatar hips 0.000 1.036 -0.102 | pose 0.00
+[Info   :    Alfrik]   0.43 None True False move 1.00/0.00 moved 9.2/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.914 -0.105 | avatar hips 0.000 1.009 -0.102 | pose 0.00
+[Info   :    Alfrik]   0.44 None True False move 1.00/0.00 moved 9.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.896 -0.103 | avatar hips 0.001 0.992 -0.100 | pose 0.00
+[Info   :    Alfrik]   0.46 None True False move 1.00/0.00 moved 9.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.883 -0.100 | avatar hips 0.001 0.979 -0.097 | pose 0.00
+[Info   :    Alfrik]   0.47 None True False move 1.00/0.00 moved 9.1/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.875 -0.096 | avatar hips 0.001 0.971 -0.094 | pose 0.00
+[Info   :    Alfrik]   0.49 None True False move 1.00/0.00 moved 9.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.874 -0.091 | avatar hips 0.001 0.970 -0.088 | pose 0.00
+[Info   :    Alfrik]   0.51 Break False False move 1.00/0.00 moved 8.9/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.874 -0.088 | avatar hips 0.002 0.970 -0.085 | pose 0.00
+[Info   :    Alfrik]   0.52 Break False False move -0.05/1.00 moved 9.1/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.879 -0.084 | avatar hips 0.002 0.975 -0.081 | pose 0.00
+[Info   :    Alfrik]   0.54 Break False False move -0.02/1.00 moved 6.0/1.9 turn 1.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.006 0.868 -0.056 | avatar hips 0.006 0.964 -0.054 | pose 0.00
+[Info   :    Alfrik]   0.56 Break False False move 0.00/1.00 moved 3.4/3.4 turn 1.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.016 0.893 -0.036 | avatar hips 0.016 0.989 -0.035 | pose 0.00
+[Info   :    Alfrik]   0.57 Break False False move 0.03/1.00 moved 2.1/4.2 turn 1.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.017 0.899 -0.032 | avatar hips 0.016 0.995 -0.031 | pose 0.00
+[Info   :    Alfrik]   0.59 Break False False move 0.03/1.00 moved 1.2/4.5 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.015 0.902 -0.032 | avatar hips 0.015 0.998 -0.031 | pose 0.00
+[Info   :    Alfrik]   0.61 Break False False move 0.05/1.00 moved 0.8/4.7 turn 1.2 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.014 0.903 -0.032 | avatar hips 0.014 0.999 -0.031 | pose 0.00
+[Info   :    Alfrik]   0.62 Break False False move 0.07/1.00 moved 0.8/4.7 turn 1.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.013 0.906 -0.032 | avatar hips 0.013 1.001 -0.032 | pose 0.00
+[Info   :    Alfrik]   0.64 Break False False move 0.09/1.00 moved 0.7/4.9 turn 1.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.013 0.908 -0.032 | avatar hips 0.012 1.004 -0.032 | pose 0.00
+[Info   :    Alfrik]   0.65 Break False False move 0.11/0.99 moved 0.7/4.9 turn 0.8 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.012 0.912 -0.033 | avatar hips 0.011 1.007 -0.032 | pose 0.00
+[Info   :    Alfrik]   0.67 Break False False move 0.13/0.99 moved 0.7/5.1 turn 0.7 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.011 0.914 -0.035 | avatar hips 0.011 1.009 -0.034 | pose 0.00
+[Info   :    Alfrik]   0.69 Break False False move 0.13/0.99 moved 0.7/5.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik] Alfrik: Odin's Charge at 11.4 m (stamina 11%)
+[Info   :    Alfrik] Skeggold hold: left fist 0.88 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 1 lands on 0
+[Info   :    Alfrik] Alfrik swings, 15 s: 436 frames, turn reversals 2, back-and-forth steps 8, animation speed changes 15, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 1 move(s), 3 swing(s) (0 slam(s)), 4 hit frame(s)
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1; he is quickened for 6 s
+[Info   :    Alfrik] Alfrik took 1 hits in 15 s (phase 2): 24 damage = 0.6% of the bar, biggest hit 24 before the cap, 0 capped at 2.5%
+[Info   :    Alfrik] Skeggold hold: left fist 0.74 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: Odin's Fall at 8.7 m
+[Info   :Vikings for Hire] Alfrik: собрался идти, а поза без причины (тело заморожено) — встаёт
+[Info   :    Alfrik] Alfrik's leap: his body was let go mid-air (kinematic False, smoothing None); held again
+[Info   :    Alfrik] Alfrik lands Odin's Fall 6.4 m on
+[Info   :    Alfrik] Alfrik's Odin's Fall landing catches 0 (1 jumped it)
+[Info   :    Alfrik] Alfrik's body smoothing was None, now Interpolate
+[Info   :    Alfrik] Skeggold hold: left fist 0.29 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik after-swing trace 3 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik]     rig: hips -0.023 0.841 -0.061 | avatar hips -0.022 0.938 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.00 None True False move 0.00/0.00 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.840 -0.061 | avatar hips -0.022 0.937 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.02 None True False move 0.00/0.00 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.839 -0.061 | avatar hips -0.022 0.936 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.03 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.838 -0.061 | avatar hips -0.022 0.935 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.05 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.8 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.837 -0.061 | avatar hips -0.022 0.934 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.07 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.7 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.836 -0.061 | avatar hips -0.022 0.933 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.08 None True False move 0.00/0.00 moved 0.0/0.0 turn 1.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.835 -0.061 | avatar hips -0.022 0.933 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.10 None True False move 0.83/-0.03 moved 0.0/0.0 turn 1.7 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.022 0.837 -0.061 | avatar hips -0.022 0.934 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.12 None True False move 0.83/-0.03 moved 0.6/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.022 0.836 -0.061 | avatar hips -0.022 0.933 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.13 None True False move 0.83/-0.05 moved 1.1/0.0 turn 1.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.009 0.874 -0.043 | avatar hips -0.009 0.970 -0.042 | pose 0.00
+[Info   :    Alfrik]   0.15 None True False move 0.83/-0.07 moved 1.6/-0.1 turn 1.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 0.910 -0.024 | avatar hips -0.004 1.005 -0.023 | pose 0.00
+[Info   :    Alfrik]   0.16 None True False move 0.91/-0.02 moved 2.1/-0.1 turn 1.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.937 -0.009 | avatar hips -0.006 1.031 -0.009 | pose 0.00
+[Info   :    Alfrik]   0.18 None True False move 0.91/-0.04 moved 2.8/-0.2 turn 1.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.945 -0.010 | avatar hips -0.007 1.039 -0.009 | pose 0.00
+[Info   :    Alfrik]   0.20 None True False move 0.91/-0.04 moved 3.2/-0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.952 -0.010 | avatar hips -0.007 1.046 -0.009 | pose 0.00
+[Info   :    Alfrik]   0.21 None True False move 0.95/-0.02 moved 3.8/-0.2 turn 1.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.959 -0.009 | avatar hips -0.007 1.053 -0.009 | pose 0.00
+[Info   :    Alfrik]   0.23 None True False move 0.95/-0.03 moved 4.3/-0.2 turn 0.8 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.967 -0.032 | avatar hips -0.010 1.061 -0.031 | pose 0.00
+[Info   :    Alfrik]   0.25 None True False move 0.95/-0.04 moved 4.6/-0.3 turn 0.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.013 0.970 -0.061 | avatar hips -0.013 1.063 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.26 None True False move 0.99/-0.01 moved 5.1/-0.3 turn 0.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.015 0.978 -0.078 | avatar hips -0.015 1.071 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.28 None True False move 0.99/-0.01 moved 6.0/-0.3 turn 0.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.016 0.989 -0.075 | avatar hips -0.015 1.082 -0.073 | pose 0.00
+[Info   :    Alfrik]   0.29 None True False move 0.99/-0.01 moved 6.5/-0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.016 0.992 -0.075 | avatar hips -0.015 1.085 -0.073 | pose 0.00
+[Info   :    Alfrik]   0.31 None True False move 1.00/0.00 moved 6.7/-0.2 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.016 1.001 -0.073 | avatar hips -0.015 1.094 -0.071 | pose 0.00
+[Info   :    Alfrik]   0.33 None True False move 1.00/0.00 moved 7.0/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.014 1.003 -0.079 | avatar hips -0.013 1.096 -0.077 | pose 0.00
+[Info   :    Alfrik]   0.34 None True False move 1.00/0.00 moved 8.0/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 1.005 -0.088 | avatar hips -0.010 1.098 -0.085 | pose 0.00
+[Info   :    Alfrik]   0.36 None True False move 1.00/0.00 moved 9.1/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 1.003 -0.097 | avatar hips -0.007 1.096 -0.095 | pose 0.00
+[Info   :    Alfrik]   0.38 None True False move 1.00/0.00 moved 9.4/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.006 0.986 -0.097 | avatar hips -0.006 1.080 -0.094 | pose 0.00
+[Info   :    Alfrik]   0.39 None True False move 1.00/0.00 moved 9.4/-0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 0.970 -0.106 | avatar hips -0.003 1.064 -0.103 | pose 0.00
+[Info   :    Alfrik]   0.41 None True False move 1.00/0.00 moved 9.8/-0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.000 0.951 -0.113 | avatar hips 0.000 1.045 -0.110 | pose 0.00
+[Info   :    Alfrik]   0.43 None True False move 1.00/0.00 moved 11.0/-0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.931 -0.118 | avatar hips 0.002 1.026 -0.115 | pose 0.00
+[Info   :    Alfrik]   0.44 None True False move 1.00/0.00 moved 11.5/-0.3 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.004 0.922 -0.120 | avatar hips 0.004 1.018 -0.117 | pose 0.00
+[Info   :    Alfrik]   0.46 None True False move 1.00/0.00 moved 11.7/-0.4 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.007 0.920 -0.120 | avatar hips 0.007 1.015 -0.117 | pose 0.00
+[Info   :    Alfrik]   0.48 None True False move 1.00/0.00 moved 12.6/-0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.008 0.917 -0.110 | avatar hips 0.007 1.013 -0.107 | pose 0.00
+[Info   :    Alfrik]   0.49 None True False move 1.00/0.00 moved 13.0/-0.4 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.008 0.919 -0.101 | avatar hips 0.008 1.014 -0.099 | pose 0.00
+[Info   :    Alfrik]   0.51 Break False False move 1.00/0.00 moved 13.2/-0.5 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.008 0.924 -0.091 | avatar hips 0.008 1.019 -0.089 | pose 0.00
+[Info   :    Alfrik]   0.53 Break False False move 0.00/0.00 moved 14.2/-0.5 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.009 0.930 -0.086 | avatar hips 0.008 1.025 -0.084 | pose 0.00
+[Info   :    Alfrik]   0.54 Break False False move 0.00/0.00 moved 13.5/-0.5 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.008 0.960 -0.083 | avatar hips 0.008 1.054 -0.081 | pose 0.00
+[Info   :    Alfrik]   0.56 Break False False move 0.00/0.00 moved 11.6/-0.3 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.009 0.989 -0.081 | avatar hips 0.009 1.082 -0.079 | pose 0.00
+[Info   :    Alfrik]   0.58 Break False False move 0.00/0.00 moved 10.7/-0.2 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.011 1.008 -0.085 | avatar hips 0.011 1.101 -0.082 | pose 0.00
+[Info   :    Alfrik]   0.59 Break False False move 0.00/0.00 moved 9.8/-0.3 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.004 0.996 -0.082 | avatar hips 0.004 1.089 -0.079 | pose 0.00
+[Info   :    Alfrik]   0.61 Break False False move 0.00/0.00 moved 9.0/-0.3 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.001 0.993 -0.082 | avatar hips -0.001 1.086 -0.080 | pose 0.00
+[Info   :    Alfrik]   0.63 Break False False move 0.00/0.00 moved 7.9/-0.3 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.005 0.997 -0.078 | avatar hips -0.005 1.090 -0.076 | pose 0.00
+[Info   :    Alfrik]   0.64 Break False False move 0.00/0.00 moved 6.7/-0.2 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.996 -0.073 | avatar hips -0.007 1.089 -0.071 | pose 0.00
+[Info   :    Alfrik]   0.66 Break False False move 0.00/0.00 moved 5.7/-0.2 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.007 0.985 -0.077 | avatar hips -0.007 1.078 -0.075 | pose 0.00
+[Info   :    Alfrik]   0.68 Break False False move 0.00/0.00 moved 4.7/-0.1 turn 0.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.973 -0.027 | avatar hips 0.002 1.067 -0.026 | pose 0.00
+[Info   :    Alfrik]   0.69 Break False False move 0.00/0.00 moved 3.2/-0.1 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik] Alfrik: Iron Advance at 6.8 m
+[Info   :    Alfrik] Alfrik swings, 15 s: 229 frames, turn reversals 2, back-and-forth steps 5, animation speed changes 10, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 3 move(s), 2 swing(s) (0 slam(s)), 2 hit frame(s)
+[Info   :    Alfrik] Alfrik's Iron Advance ends in a bash
+[Info   :    Alfrik] Alfrik's Shoulder Breaker hits 0 (with the blow)
+[Info   :    Alfrik] Skeggold hold: left fist 0.78 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Alfrik's FURY blow 1 lands on 0
+[Info   :    Alfrik] Skeggold hold: left fist 0.28 m off the haft, bent 0% (0 deg), right fist 0.06 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's FURY blow 2 lands on 1
+[Info   :    Alfrik] Alfrik's FURY ends after 2 of 3 blows: target out of reach (13.7 m)
+[Info   :    Alfrik] Alfrik swings, 15 s: 449 frames, turn reversals 0, back-and-forth steps 10, animation speed changes 14, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 1 move(s), 4 swing(s) (0 slam(s)), 4 hit frame(s)
+[Info   :    Alfrik] Alfrik took 2 hits in 15 s (phase 2): 71 damage = 1.8% of the bar, biggest hit 38 before the cap, 0 capped at 2.5%
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1; he is quickened for 6 s
+[Info   :    Alfrik] Skeggold hold: left fist 0.76 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik after-swing trace 4 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik]     rig: hips -0.023 0.841 -0.061 | avatar hips -0.022 0.938 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.00 None False False move 0.54/0.84 moved 0.0/0.0 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.023 0.839 -0.061 | avatar hips -0.022 0.937 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.02 None True False move 0.51/0.86 moved 0.0/0.0 turn -1.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.009 0.865 -0.061 | avatar hips -0.008 0.961 -0.059 | pose 0.00
+[Info   :    Alfrik]   0.03 None True False move 0.49/0.87 moved 0.1/0.2 turn -1.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.891 -0.053 | avatar hips 0.002 0.987 -0.052 | pose 0.00
+[Info   :    Alfrik]   0.05 None True False move 0.49/0.87 moved 0.3/0.7 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.891 -0.052 | avatar hips 0.002 0.987 -0.051 | pose 0.00
+[Info   :    Alfrik]   0.07 None True False move 0.47/0.88 moved 0.6/1.3 turn -1.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.003 0.916 -0.040 | avatar hips 0.003 1.011 -0.039 | pose 0.00
+[Info   :    Alfrik]   0.09 None True False move 0.45/0.89 moved 1.1/2.2 turn -1.2 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.919 -0.035 | avatar hips 0.002 1.014 -0.035 | pose 0.00
+[Info   :    Alfrik]   0.11 None True False move 0.44/0.90 moved 0.8/2.2 turn -1.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.922 -0.033 | avatar hips 0.001 1.017 -0.032 | pose 0.00
+[Info   :    Alfrik]   0.12 None True False move 0.67/0.03 moved 1.9/1.7 turn -2.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.924 -0.032 | avatar hips 0.002 1.019 -0.031 | pose 0.00
+[Info   :    Alfrik]   0.14 None True False move 0.67/0.06 moved 3.0/1.1 turn -2.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.004 0.940 -0.019 | avatar hips -0.004 1.034 -0.018 | pose 0.00
+[Info   :    Alfrik]   0.16 None True False move 0.74/0.03 moved 3.8/0.8 turn -2.2 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.006 0.951 -0.017 | avatar hips -0.006 1.045 -0.017 | pose 0.00
+[Info   :    Alfrik]   0.18 None True False move 0.73/0.05 moved 4.6/0.6 turn -2.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.009 0.960 -0.044 | avatar hips -0.009 1.054 -0.042 | pose 0.00
+[Info   :    Alfrik]   0.20 None True False move 0.73/0.08 moved 5.4/0.6 turn -1.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.009 0.966 -0.072 | avatar hips -0.009 1.060 -0.070 | pose 0.00
+[Info   :    Alfrik]   0.21 None True False move 0.73/0.08 moved 5.8/0.5 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.008 0.974 -0.072 | avatar hips -0.008 1.068 -0.070 | pose 0.00
+[Info   :    Alfrik]   0.23 None True False move 0.82/0.03 moved 6.5/0.3 turn -1.8 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.984 -0.076 | avatar hips -0.010 1.077 -0.074 | pose 0.00
+[Info   :    Alfrik]   0.25 None True False move 0.82/0.05 moved 7.5/0.4 turn -1.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.010 0.994 -0.073 | avatar hips -0.010 1.087 -0.071 | pose 0.00
+[Info   :    Alfrik]   0.27 None True False move 0.87/0.02 moved 7.8/0.3 turn -1.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.008 1.000 -0.073 | avatar hips -0.008 1.093 -0.071 | pose 0.00
+[Info   :    Alfrik]   0.29 None True False move 0.87/0.04 moved 8.6/0.4 turn -1.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 1.002 -0.082 | avatar hips -0.003 1.094 -0.080 | pose 0.00
+[Info   :    Alfrik]   0.30 None True False move 0.87/0.06 moved 9.1/0.5 turn -1.2 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.999 -0.090 | avatar hips 0.002 1.092 -0.088 | pose 0.00
+[Info   :    Alfrik]   0.32 None True False move 0.93/0.02 moved 9.6/0.5 turn -1.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.003 0.997 -0.100 | avatar hips 0.003 1.090 -0.097 | pose 0.00
+[Info   :    Alfrik]   0.34 None True False move 0.93/0.03 moved 10.2/0.5 turn -1.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.007 0.982 -0.113 | avatar hips 0.007 1.076 -0.110 | pose 0.00
+[Info   :    Alfrik]   0.36 None False False move 0.25/0.97 moved 11.1/0.3 turn -0.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.007 0.961 -0.119 | avatar hips 0.007 1.055 -0.115 | pose 0.00
+[Info   :    Alfrik]   0.37 None False False move 0.41/0.91 moved 11.5/-0.2 turn 2.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.027 0.888 -0.068 | avatar hips 0.026 0.984 -0.066 | pose 0.00
+[Info   :    Alfrik]   0.39 None False False move 0.52/0.86 moved 6.8/3.7 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.025 0.872 -0.066 | avatar hips 0.024 0.968 -0.065 | pose 0.00
+[Info   :    Alfrik]   0.41 None False False move 0.61/0.80 moved 5.5/4.4 turn 2.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.025 0.857 -0.056 | avatar hips 0.025 0.954 -0.055 | pose 0.00
+[Info   :    Alfrik]   0.43 None False False move 0.69/0.73 moved 5.0/4.5 turn 2.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.023 0.856 -0.052 | avatar hips 0.022 0.952 -0.051 | pose 0.00
+[Info   :    Alfrik]   0.44 None False False move 0.75/0.66 moved 4.9/4.4 turn 2.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.019 0.855 -0.050 | avatar hips 0.018 0.952 -0.049 | pose 0.00
+[Info   :    Alfrik]   0.46 None False False move 0.81/0.58 moved 5.5/4.4 turn 2.1 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.014 0.857 -0.050 | avatar hips 0.013 0.954 -0.049 | pose 0.00
+[Info   :    Alfrik]   0.48 None False False move 0.86/0.51 moved 6.1/4.4 turn 1.9 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.009 0.861 -0.052 | avatar hips 0.009 0.958 -0.050 | pose 0.00
+[Info   :    Alfrik]   0.50 None False False move 0.90/0.44 moved 5.9/3.7 turn 1.7 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.005 0.862 -0.051 | avatar hips 0.005 0.958 -0.049 | pose 0.00
+[Info   :    Alfrik]   0.52 Break False False move 0.91/0.42 moved 5.7/2.9 turn 1.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.868 -0.057 | avatar hips 0.002 0.964 -0.055 | pose 0.00
+[Info   :    Alfrik]   0.54 Break False False move 0.00/0.00 moved 6.4/2.8 turn 1.3 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.873 -0.058 | avatar hips 0.002 0.970 -0.057 | pose 0.00
+[Info   :    Alfrik]   0.55 Break False False move 0.00/0.00 moved 6.3/2.6 turn 0.0 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.002 0.887 -0.059 | avatar hips 0.002 0.983 -0.057 | pose 0.00
+[Info   :    Alfrik]   0.57 Break False False move 0.00/0.00 moved 5.0/2.1 turn -0.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.001 0.921 -0.063 | avatar hips 0.001 1.016 -0.062 | pose 0.00
+[Info   :    Alfrik]   0.59 Break False False move 0.00/0.00 moved 4.1/1.8 turn -0.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.004 0.950 -0.037 | avatar hips 0.004 1.044 -0.036 | pose 0.00
+[Info   :    Alfrik]   0.61 Break False False move 0.00/0.00 moved 2.8/1.2 turn -0.6 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.007 0.953 -0.016 | avatar hips 0.007 1.047 -0.016 | pose 0.00
+[Info   :    Alfrik]   0.62 Break False False move 0.00/0.00 moved 1.5/0.7 turn -0.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips 0.005 0.949 -0.020 | avatar hips 0.005 1.044 -0.019 | pose 0.00
+[Info   :    Alfrik]   0.64 Break False False move 0.00/0.00 moved 0.6/0.3 turn -0.5 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.003 0.918 -0.039 | avatar hips -0.003 1.013 -0.038 | pose 0.00
+[Info   :    Alfrik]   0.66 Break False False move 0.00/0.00 moved 0.1/0.0 turn -0.4 speed 1.00 state 229373857
+[Info   :    Alfrik]     rig: hips -0.015 0.887 -0.054 | avatar hips -0.014 0.983 -0.053 | pose 0.00
+[Info   :    Alfrik]   0.68 Break False False move 0.00/0.00 moved 0.0/0.0 turn -0.4 speed 1.00 state 229373857
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 9.1 m
+[Info   :    Alfrik] Skeggold hold: left fist 0.91 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik swings, 15 s: 250 frames, turn reversals 1, back-and-forth steps 8, animation speed changes 9, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 3 swing(s) (0 slam(s)), 2 hit frame(s)
+[Info   :    Alfrik] Alfrik took 1 hits in 15 s (phase 2): 48 damage = 1.2% of the bar, biggest hit 48 before the cap, 0 capped at 2.5%
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Alfrik's Grave Ring goes out with the blow
+[Info   :    Alfrik] Alfrik's Grave Ring catches 0 (0 jumped it)
+[Info   :    Alfrik] Skeggold hold: left fist 0.32 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: Odin's Charge at 6.2 m (stamina 9%)
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 1 lands on 0
+[Info   :    Alfrik] Alfrik swings, 15 s: 522 frames, turn reversals 0, back-and-forth steps 7, animation speed changes 14, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 4 swing(s) (1 slam(s)), 5 hit frame(s)
+[Info   :    Alfrik] Skeggold hold: left fist 0.67 m off the haft, bent 0% (0 deg), right fist 0.04 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 2 lands on 0
+[Info   :    Alfrik] Alfrik: Retribution
+[Info   :    Alfrik] Alfrik's Retribution answers TeSt
+[Info   :    Alfrik] Alfrik's Retribution answer lands on 1
+[Info   :    Alfrik] Alfrik's Retribution ends: 1 melee blow(s) taken close by, 1 answered
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 9.5 m
+[Info   :    Alfrik] Skeggold hold: left fist 0.78 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik swings, 15 s: 406 frames, turn reversals 0, back-and-forth steps 9, animation speed changes 15, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 4 swing(s) (0 slam(s)), 4 hit frame(s)
+[Info   :    Alfrik] Alfrik took 1 hits in 15 s (phase 2): 29 damage = 0.7% of the bar, biggest hit 29 before the cap, 0 capped at 2.5%
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Alfrik's FURY blow 1 lands on 0
+[Info   :    Alfrik] Skeggold hold: left fist 0.31 m off the haft, bent 0% (0 deg), right fist 0.04 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's FURY blow 2 lands on 0
+[Info   :    Alfrik] Alfrik's FURY blow 3 lands on 1
+[Info   :    Alfrik] Alfrik: Odin's Charge at 20.2 m (stamina 20%)
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 1 lands on 0
+[Info   :    Alfrik] Skeggold hold: left fist 0.83 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik swings, 15 s: 513 frames, turn reversals 1, back-and-forth steps 5, animation speed changes 10, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 5 swing(s) (1 slam(s)), 4 hit frame(s)
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1; he is quickened for 6 s
+[Info   :    Alfrik] Skeggold hold: left fist 0.74 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Alfrik's Grave Ring goes out with the blow
+[Info   :    Alfrik] Alfrik's Grave Ring catches 0 (0 jumped it)
+[Info   :    Alfrik] Alfrik swings, 15 s: 292 frames, turn reversals 0, back-and-forth steps 4, animation speed changes 7, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 2 swing(s) (1 slam(s)), 3 hit frame(s)
+[Info   :    Alfrik] Skeggold hold: left fist 0.78 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 5.0 m
+[Info   :    Alfrik] Alfrik: Retribution
+[Info   :    Alfrik] Skeggold hold: left fist 1.00 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's Retribution ends: 0 melee blow(s) taken close by, 0 answered
+[Info   :    Alfrik] Alfrik swings, 15 s: 362 frames, turn reversals 1, back-and-forth steps 6, animation speed changes 13, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 3 swing(s) (0 slam(s)), 3 hit frame(s)
+[Info   :    Alfrik] Alfrik: Reaping Sweep
+[Info   :    Alfrik] Skeggold hold: left fist 0.33 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's Reaping Sweep 1 lands on 0
+[Info   :    Alfrik] Alfrik's Reaping Sweep 2 lands on 0
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Skeggold hold: left fist 0.30 m off the haft, bent 2% (1 deg), right fist 0.04 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's FURY blow 1 lands on 0
+[Info   :    Alfrik] Alfrik's FURY blow 2 lands on 0
+[Info   :    Alfrik] Alfrik swings, 15 s: 631 frames, turn reversals 3, back-and-forth steps 11, animation speed changes 15, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 5 swing(s) (0 slam(s)), 5 hit frame(s)
+[Info   :    Alfrik] Alfrik's FURY blow 3 lands on 1
+[Info   :    Alfrik] Alfrik: Odin's Charge at 7.1 m (stamina 3%)
+[Info   :    Alfrik] Skeggold hold: left fist 0.78 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 1 lands on 0
+[Info   :    Alfrik] Alfrik's Odin's Charge slash 2 lands on 0
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1; he is quickened for 6 s
+[Info   :    Alfrik] Skeggold hold: left fist 0.89 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a swing
+[Info   :    Alfrik] Alfrik swings, 15 s: 419 frames, turn reversals 0, back-and-forth steps 9, animation speed changes 10, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 2 move(s), 4 swing(s) (1 slam(s)), 4 hit frame(s)
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 8.3 m
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Skeggold hold: left fist 0.99 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand, in a slam
+[Info   :    Alfrik] Alfrik's Grave Ring goes out with the blow
+[Info   :    Alfrik] Alfrik's Grave Ring catches 0 (0 jumped it)
+[Info   :    Alfrik] Alfrik: Odin's Charge at 7.5 m (stamina 21%)
+[Info   :    Alfrik] Alfrik swings, 15 s: 265 frames, turn reversals 0, back-and-forth steps 3, animation speed changes 6, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's pace, 15 s: 3 move(s), 2 swing(s) (1 slam(s)), 2 hit frame(s)
+[Info   :    Alfrik] Skeggold hold: left fist 0.17 m off the haft, bent 66% (16 deg), right fist 0.05 m from the game's hand, in a swing
