@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>Alfrik</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- Build against the game's own runtime assemblies (copied into ../refs), no reference packs needed -->
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <NoStdLib>true</NoStdLib>
+    <Refs>$(MSBuildThisFileDirectory)..\refs</Refs>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(Refs)\mscorlib.dll" Private="false" />
+    <Reference Include="$(Refs)\System.dll" Private="false" />
+    <Reference Include="$(Refs)\System.Core.dll" Private="false" />
+    <Reference Include="$(Refs)\netstandard.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.PhysicsModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.AnimationModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.ParticleSystemModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.AudioModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.ImageConversionModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.UnityWebRequestModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.UnityWebRequestAudioModule.dll" Private="false" />
+    <Reference Include="$(Refs)\assembly_valheim.dll" Private="false" />
+    <Reference Include="$(Refs)\assembly_utils.dll" Private="false" />
+    <Reference Include="$(Refs)\assembly_guiutils.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.UI.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.UIModule.dll" Private="false" />
+    <Reference Include="$(Refs)\UnityEngine.AssetBundleModule.dll" Private="false" />
+    <!-- ValheimVRM's loader and UniVRM/UniGLTF, used as libraries only -->
+    <Reference Include="$(Refs)\ValheimVRM.dll" Private="false" Aliases="vrm" />
+    <Reference Include="$(Refs)\UniGLTF.dll" Private="false" />
+    <Reference Include="$(Refs)\UniGLTF.Utils.dll" Private="false" />
+    <Reference Include="$(Refs)\VRMShaders.GLTF.IO.Runtime.dll" Private="false" />
+    <Reference Include="$(Refs)\BepInEx.dll" Private="false" />
+    <Reference Include="$(Refs)\0Harmony.dll" Private="false" />
+    <Reference Include="$(Refs)\Jotunn.dll" Private="false" />
+  </ItemGroup>
+  <!-- Off Windows (cloud) the .NET Framework 4.8 targeting pack comes from NuGet -->
+  <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

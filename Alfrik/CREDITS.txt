@@ -1,0 +1,51 @@
+Alfrik plugin - third-party assets
+
+MODELS
+- Hamr (left axe): "Simple Viking Axe SmPBR" by Elisey (https://sketchfab.com/dwelfster),
+  https://sketchfab.com/3d-models/simple-viking-axe-smpbr-674ebfeb42254b5cae893a5c1491f4b2, CC-BY-4.0.
+  Changes: textures reduced to 1024 px, packed as glb, fitted into the Berserkir axes.
+- Hugr (right axe): "Viking Axe" by Sam (https://sketchfab.com/SGold8556),
+  https://sketchfab.com/3d-models/viking-axe-af05a0aa00f24016ab2d9b959ca8ab4b, CC-BY-4.0.
+  Changes: textures reduced to 1024 px, parts joined, packed as glb.
+- Skeggöld (phase 2): "battleaxe-leo" by Leo.Lei (https://sketchfab.com/Leo.Lei),
+  https://sketchfab.com/3d-models/battleaxe-leo-60548460bc114e82a29365b9286b8bec, CC-BY-4.0.
+  Changes: textures reduced to 1024 px, packed as glb.
+- Fjallbrjótr (phase 2 great hammer): "Dwarven Hammer" by MattDonlan (https://sketchfab.com/MattDonlan),
+  https://sketchfab.com/3d-models/dwarven-hammer-6237aaf3b7884fddb553f9454a07ab74, CC-BY-4.0.
+  This work is based on "Dwarven Hammer" by MattDonlan, licensed under CC-BY-4.0.
+  Changes: textures reduced to 1024 px, packed as glb.
+CC-BY-4.0: http://creativecommons.org/licenses/by/4.0/
+
+PHASE 1, THE BERSERKER (opengameart.org; CC0 unless noted)
+- music_phase1: "Boss Battle Music" (Epic Boss Battle, seamlessly looping) by Juhani Junkala / SubspaceAudio
+- roar: "CC0 Deep Monster Roar" by trazzz123 (the same roar as phase 2)
+- growl, yield: "orc voice" by Tim Rockk (slowed slightly)
+- steam: synthesized for this mod (no samples)
+- heartbeat: "Heartbeat (single sound)" by Independent.nu
+- raven: "crow caw" by zeroisnotnull
+- swing, spin: "Swishes Sound Pack" by artisticdude
+- dodge: "Swish - bamboo stick weapon swhoshes" by Iwan 'qubodup' Gabovitch
+- shoulder_whoosh, catch, parry2, thunder: "100 CC0 SFX #2" by rubberduck
+- hit, parry1: "Impact" by Iwan 'qubodup' Gabovitch
+- punch, hook, shoulder, cleave, land, rune, mark: "100 Combat Sound Effects" compiled by untamedpixels -
+  Kenney (Impact Sounds, RPG Audio, Sci-fi Sounds) and lentikula (Basic Spell Impacts)
+- p1_puff, p1_dust, p1_smoke, p1_fire, p1_spark, p1_star, p1_glow, p1_flare: "Smoke particle assets" by Kenney
+- p1_slash: "High resolution slash effects" by MetaShinryu
+- p1_firering, p1_smokeblast, p1_firecrown, p1_bloodring, p1_ravenring: "Animated particle effects #1" by para
+
+PHASE 2, THE UNBROKEN (opengameart.org; CC0 unless noted)
+- music_phase2: "Blackmoor Colossus" mix by glitchart of "Colossal Boss Battle Theme" by Matthew Pablo (CC-BY 3.0),
+  "Forgotten Violins" by Erie (CC-BY-SA 3.0) and "Epic Hero - Epic Orchestra" by migfus20 (CC-BY 4.0); the mix is CC-BY-SA 4.0
+- p2roar: "CC0 Deep Monster Roar" by trazzz123
+- p2growl: "CC0 Deep Monster Roar" by trazzz123, a short slowed slice
+- p2swing: "Swishes Sound Pack" by artisticdude, slowed down
+- p2clash: "20 Sword Sound Effects (Attacks and Clashes)" by StarNinjas
+- p2glint: "RPG Sound Pack" by artisticdude
+- p2chain: "80 CC0 RPG SFX" by rubberduck
+- p2hit, p2boom, p2bleed: "Various Sound Effects" by Spring Spring / Julie Damsgaard
+- p2rumble: "rumble fx" by cinameng, trimmed
+- p2_explosion, p2_fireball, p2_eruption: "Explosion effects and more" by Soluna Software
+- p2_slash: "High resolution slash effects" by MetaShinryu
+- p2_blood: "Bloodsplatter and Bloodsplash Animation" by overcrafted
+
+Made for this mod: the rune and emblem textures and the summoning stone are drawn in code.

@@ -1,0 +1,185 @@
+[Info   :   BepInEx] Loading [Alfrik 0.9.8]
+[Error  : Unity Log] InvalidOperationException: Steamworks is not initialized.
+[Info   :    Alfrik] VRM avatar 'Alfrik' goes on the one Vikings for Hire viking named Alfrik
+[Info   :    Alfrik] Alfrik, The Left Fist of Odin: 2 boss phase(s), then a Berserker companion (console: alfrik)
+[Info   :    Alfrik] Alfrik sounds loaded: catch, cleave x2, dodge, growl x2, heartbeat, hit x2, hook, land, mark, music_phase1, music_phase2, p2bleed x2, p2boom, p2chain x3, p2clash x10, p2glint x3, p2growl, p2hit x2, p2roar, p2rumble, p2swing x4, parry x2, punch x5, raven, roar, rune x2, shoulder, shoulder_whoosh, spin x2, steam, swing x4, thunder, yield
+[Info   :    Alfrik] Hugr & Hamr: default ((0.33, 0.92, 0.10)) gets the axe model
+[Info   :    Alfrik] Hugr & Hamr: default ((0.47, 0.83, 0.09)) gets the axe model
+[Warning:    Alfrik] Hugr & Hamr: the held axes (Berzerkr) cannot be read; they keep the Berserkir look
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr [Transform, Rigidbody, ZNetView, ZSyncTransform, ItemDrop, ParticleSystemRenderer, ParticleSystem]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg/LeftFoot [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToeBase [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg/RightFoot [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/RightUpLeg/RightLeg/RightFoot/RightToeBase [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck/Head [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/Neck/Head/Jaw [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2/RightHandRing3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/armature/Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3 [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail [Transform, MeleeWeaponTrail]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail/base [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/equiped/trail/tip [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach_skin/berzerkr/Berzerkr [Transform, SkinnedMeshRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach [Transform]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default [Transform, MeshFilter, MeshRenderer, BoxCollider]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow [Transform, ParticleIntensityScaler]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Particle System [Transform, ParticleSystem, ParticleSystemRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Particle System Force Field [Transform, ParticleSystemForceField]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow/Point light [Transform, Light, LightLod]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default [Transform, MeshFilter, MeshRenderer, BoxCollider]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1) [Transform, ParticleIntensityScaler]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Particle System [Transform, ParticleSystem, ParticleSystemRenderer]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Particle System Force Field [Transform, ParticleSystemForceField]
+[Info   :    Alfrik] Hugr & Hamr part: Alfrik_HugrHamr/attach/default/UpgraderGlow (1)/Point light [Transform, Light, LightLod]
+[Info   :    Alfrik] Fjallbrjotr on SledgeIron: blunt 175, force 200, heavy attack none
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Warning:  HarmonyX] AccessTools.GetTypesFromAssembly: assembly PlanBuild, Version=0.20.0.0, Culture=neutral, PublicKeyToken=null => System.Reflection.ReflectionTypeLoadException: Exception of type 'System.Reflection.ReflectionTypeLoadException' was thrown.
+System.TypeLoadException: Could not load type of field 'PlanBuild.ModCompat.PatcherAzuCraftyBoxes+AzuCraftyBoxesInventory:container' (0) due to: Could not load file or assembly 'AzuCraftyBoxes, Version=1.5.6.0, Culture=neutral, PublicKeyToken=null' or one of its dependencies.
+[Info   :    Alfrik] Alfrik's animator was Fixed / CullUpdateTransforms; now Normal / AlwaysAnimate
+[Info   :    Alfrik] Alfrik equipped $item_arrow_wood from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_chest_leather from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_legs_rags from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_cape_deerhide from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.GiveDefaultItem < Humanoid.DMD<Humanoid::GiveDefaultItems> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear
+[Info   :    Alfrik] Alfrik equipped $item_club from: Humanoid.DMD<Humanoid::EquipItem> < Humanoid.DMD<Humanoid::EquipBestWeapon> < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear < VikingNpc.Update
+[Info   :    Alfrik] Alfrik equipped Fjallbrjótr from: Humanoid.DMD<Humanoid::EquipItem> < AlfrikBoss.Gear < VikingNpc.DMD<ValheimNpc.VikingNpc::RebuildGear> < VikingNpc.UpdateGear < VikingNpc.Update
+[Info   :    Alfrik] Hugr & Hamr grip from SledgeIron: haft (0.00, 0.00, 1.00), blade (-1.00, 0.00, 0.00), length 1.36, centre (0.00, 0.00, 0.28)
+[Info   :    Alfrik] VRM avatar 'Alfrik' loaded
+[Info   :    Alfrik] Alfrik's eye glow is placed from the avatar's head bone (no eye bones), (-0.036, 0.116, 0.095) from the head
+[Info   :    Alfrik] Alfrik: Iron Advance at 8.9 m
+[Info   :    Alfrik] Alfrik readies a Punishing Parry against TeSt
+[Info   :    Alfrik] Alfrik's Punishing Parry caught TeSt
+[Info   :    Alfrik] Skeggold hold: left fist 0.11 m off the haft, bent 97% (8 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik after-swing trace 1 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 15.9 m
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1
+[Info   :    Alfrik] Alfrik: Earthsplitter at 9.9 m
+[Info   :    Alfrik] Alfrik re-equipped 6 times in 15 s
+[Info   :    Alfrik] Alfrik swings, 15 s: 147 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 2, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Skeggold hold: left fist 0.98 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik took 1 hits in 15 s (phase 2): 2 damage = 2.5% of the bar, biggest hit 26 before the cap, 1 capped at 2.5%
+[Info   :    Alfrik] Alfrik: Odin's Fall at 11.5 m
+[Info   :Vikings for Hire] Alfrik: собрался идти, а поза без причины (тело заморожено) — встаёт
+[Info   :    Alfrik] Alfrik's body smoothing was None, now Interpolate
+[Info   :    Alfrik] Alfrik lands Odin's Fall 8.6 m on, 1 caught
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Skeggold hold: left fist 0.58 m off the haft, bent 0% (0 deg), right fist 0.03 m from the game's hand
+[Info   :    Alfrik] Alfrik: Iron Advance at 6.3 m
+[Info   :    Alfrik] Alfrik swings, 15 s: 515 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 8, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik's Iron Advance ends in a bash
+[Info   :    Alfrik] Skeggold hold: left fist 0.93 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik after-swing trace 2 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Alfrik: Earthsplitter at 13.9 m
+[Info   :    Alfrik] Skeggold hold: left fist 0.73 m off the haft, bent 0% (0 deg), right fist 0.04 m from the game's hand
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 13.3 m
+[Info   :    Alfrik] Alfrik: Odin's Fall at 9.6 m
+[Info   :    Alfrik] Alfrik lands Odin's Fall 8.0 m on, 0 caught
+[Info   :    Alfrik] Alfrik swings, 15 s: 432 frames, turn reversals 0, back-and-forth steps 1, animation speed changes 6, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1
+[Info   :    Alfrik] Alfrik: Iron Advance at 6.7 m
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Skeggold hold: left fist 0.99 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik after-swing trace 3 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik] Alfrik: Earthsplitter at 14.5 m
+[Info   :    Alfrik] Alfrik swings, 15 s: 122 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 2, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik: Odin's Fall at 13.3 m
+[Info   :    Alfrik] Alfrik lands Odin's Fall 9.7 m on, 1 caught
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 9.3 m
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment
+[Info   :    Alfrik] Skeggold hold: left fist 0.98 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik swings, 15 s: 404 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 6, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik: Earthsplitter at 19.2 m
+[Info   :    Alfrik] Skeggold hold: left fist 1.05 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik after-swing trace 4 (t, act, ai on, in attack, move dir fwd/side, moved fwd/side cm, turned deg, anim speed, anim state):
+[Info   :    Alfrik] Alfrik: Iron Advance at 15.9 m
+[Info   :    Alfrik] Alfrik's Iron Wall returns TeSt's shot (55)
+[Info   :    Alfrik] Alfrik's Iron Wall returns TeSt's shot (40)
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1
+[Info   :    Alfrik] Alfrik: Odin's Fall at 11.5 m
+[Info   :Vikings for Hire] Alfrik: собрался идти, а поза без причины (тело заморожено) — встаёт
+[Info   :    Alfrik] Alfrik lands Odin's Fall 12.0 m on, 1 caught
+[Info   :    Alfrik] Alfrik: Grave Ring
+[Info   :    Alfrik] Skeggold hold: left fist 0.98 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik swings, 15 s: 208 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 4, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 15.6 m
+[Info   :    Alfrik] Odin's Wrath strikes 1
+[Info   :    Alfrik] Odin's Wrath strikes 1
+[Info   :    Alfrik] Alfrik: Earthsplitter at 18.5 m
+[Info   :    Alfrik] Odin's Wrath strikes 1
+[Info   :    Alfrik] Skeggold hold: left fist 0.94 m off the haft, bent 0% (0 deg), right fist 0.04 m from the game's hand
+[Info   :    Alfrik] Alfrik: Retribution
+[Info   :    Alfrik] Alfrik raises the Iron Wall against TeSt
+[Info   :    Alfrik] Alfrik's Iron Wall returns TeSt's shot (26)
+[Info   :    Alfrik] Alfrik swings, 15 s: 230 frames, turn reversals 0, back-and-forth steps 0, animation speed changes 4, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Alfrik took 3 hits in 15 s (phase 2): 5 damage = 7.5% of the bar, biggest hit 46 before the cap, 3 capped at 2.5%
+[Info   :    Alfrik] Alfrik: Iron Advance at 10.3 m
+[Info   :    Alfrik] Alfrik's Iron Wall returns TeSt's shot (34)
+[Info   :    Alfrik] Alfrik: Reaping Sweep
+[Info   :    Alfrik] Skeggold hold: left fist 1.00 m off the haft, bent 0% (0 deg), right fist 0.05 m from the game's hand
+[Info   :    Alfrik] Alfrik: Earthsplitter at 15.8 m
+[Info   :    Alfrik] Alfrik: Odin's Wrath at 19.7 m
+[Info   :    Alfrik] Alfrik swings, 15 s: 814 frames, turn reversals 0, back-and-forth steps 1, animation speed changes 6, stagger bar 0 stagger(s)
+[Info   :    Alfrik] Odin's Wrath strikes 1
+[Info   :    Alfrik] Alfrik took 3 hits in 15 s (phase 2): 5 damage = 7.5% of the bar, biggest hit 35 before the cap, 3 capped at 2.5%
+[Info   :    Alfrik] Alfrik: Odin's Fall at 16.9 m
+[Info   :    Alfrik] Odin's Wrath strikes 1
+[Info   :    Alfrik] Alfrik lands Odin's Fall 14.8 m on, 0 caught
+[Info   :    Alfrik] Alfrik: War Horn
+[Info   :    Alfrik] Alfrik's War Horn slows 1
+[Info   :    Alfrik] Alfrik: FURY - Odin's Judgment

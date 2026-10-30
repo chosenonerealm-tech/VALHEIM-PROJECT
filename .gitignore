@@ -1,0 +1,5 @@
+bin/
+obj/
+# Game and mod DLLs and decompiled code belong to their owners: kept local until this repo is private.
+refs/
+decomp/
