@@ -57,6 +57,19 @@ Watch these when touching related code:
    owner's game and the friend's folder, and after a test pushes the trimmed log to `logs/`.
 3. The owner plays and reports.
 
+### Branch rules (the owner's `deploy.bat` depends on them)
+
+- `deploy.bat` installs whichever branch was pushed to **most recently**, so the last push must always be the newest
+  working version. Never push to an older branch afterwards.
+- Keep working on **one** branch: `cloud/demigod` (current). No new branch per task. If a session forces its own
+  branch name, first merge the newest branch into it (`git fetch && git merge origin/<newest branch>`), then keep
+  using that one branch.
+- Test logs arrive in `logs/` on the branch the owner last played: `git pull` before every task and read the newest
+  log there.
+- Before pushing: `git pull --no-edit`. On a conflict, resolve it and finish the merge commit; never push a half-done
+  merge.
+- Bump `Plugin.Version` on every push, so the owner can see in game which build is loaded.
+
 ## Rules (from the owner — follow them exactly)
 
 - **Bump `Plugin.Version`** in `Plugin.cs` with every change set.
